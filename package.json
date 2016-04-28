@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --module-bind 'js=babel-loader'",
+    "watch": "webpack --module-bind 'js=babel-loader' --watch"
   },
   "author": "",
   "license": "MIT",
