@@ -50,10 +50,23 @@ var CalculatorBox = React.createClass({
     };
   },
   onChangeHandle: function (change) {
-      debugger;
+      // debugger;
     var inputs = Object.assign({}, this.state.inputs, { [change.type]: change.value });
-    var team = abacus.department[this.state.inputs.department][0] * abacus.sector[this.state.inputs.sector][1] * abacus.department[this.state.inputs.department][2] * 48 * this.state.inputs.team;
-    this.setState({ inputs: inputs, team: team });
+
+    var team =
+      abacus.department[inputs.department][0] *
+      abacus.sector[inputs.sector][1] *
+      abacus.department[inputs.department][2] / 100 *
+      48 *
+      inputs.team;
+
+    var company = abacus.sector[inputs.sector][0] * // weekly meeting by sector
+    abacus.sector[inputs.sector][1] * // avg meeting duraction by sector
+    abacus.sector[inputs.sector][2] / 100 * // % improductive meetings by sector
+    inputs.size * // ppl in company
+    48 ; // miss % white colar
+
+    this.setState({ inputs: inputs, team: Math.ceil(team), company: Math.ceil(company) });
   },
   render: function () {
     return (
@@ -83,7 +96,7 @@ var CompanySector = React.createClass({
   render: function () {
     return (
       <div className="CompanySector">
-        <select ref="select" type="select" onChange={this.onChange} value={this.state.sector} name="CompanySector" id="CompanySector">
+        <select ref="select" type="select" onChange={this.onChange} name="CompanySector" id="CompanySector">
           <option value="">Please choose..</option>
           {this.state.sectors.map(function (sector, index) {
             return <option key={index} value={index}>{sector}</option>;
@@ -97,7 +110,15 @@ var CompanySector = React.createClass({
 var CompanySize = React.createClass({
   getInitialState: function () {
     return {
-      sizes: ['Self employed', '1 - 9 employees', '10 - 49 employees', '50 - 99 employees', '100 - 249 employees', '250 - 500 employees', 'More than 500']
+      sizes: [
+        { count: 1, label: 'Self employed' },
+        { count: 7, label: '1 - 9 employees' },
+        { count: 42, label: '10 - 49 employees' },
+        { count: 82, label: '50 - 99 employees' },
+        { count: 198, label: '100 - 249 employees' },
+        { count: 451, label: '250 - 500 employees' },
+        { count: 1337, label: 'More than 500' }
+      ]
     };
   },
   onChange: function (e) {
@@ -107,10 +128,10 @@ var CompanySize = React.createClass({
   render: function () {
     return (
       <div className="CompanySize">
-        <select ref="select" type="select" onChange={this.onChange} value={this.state.size} name="CompanySize" id="CompanySize">
+        <select ref="select" type="select" onChange={this.onChange} name="CompanySize" id="CompanySize">
           <option value="">Please choose..</option>
           {this.state.sizes.map(function (size, index) {
-            return <option key={index} value={index}>{size}</option>;
+            return <option key={index} value={size.count}>{size.label}</option>;
           })}
         </select>
       </div>
@@ -131,7 +152,7 @@ var CompanyDepartment = React.createClass({
   render: function () {
     return (
       <div className="CompanyDepartment">
-        <select ref="select" type="select" onChange={this.onChange} value={this.state.department} name="CompanyDepartment" id="CompanyDepartment">
+        <select ref="select" type="select" onChange={this.onChange} name="CompanyDepartment" id="CompanyDepartment">
           <option value="">Please choose..</option>
           {this.state.departments.map(function (department, index) {
             return <option key={index} value={index}>{department}</option>;
@@ -147,8 +168,8 @@ var TeamMembers = React.createClass({
     return { members: '' };
   },
   onChange: function (e) {
-    // this.setState({ team: this.refs.input.value });
-    // this.props.onInputChange({ type: 'team', value: this.refs.input.value });
+    this.setState({ team: this.refs.input.value });
+    this.props.onInputChange({ type: 'team', value: this.refs.input.value });
   },
   render: function () {
     return (
@@ -165,7 +186,9 @@ var Result = React.createClass({
       <div className="Result">
         {(!this.props.team && !this.props.company && !this.props.department && !this.props.team) ?
           <div>Plase select..</div> :
-          <div>Team: <span>{this.props.team}</span> - Company: <span>{this.props.company}</span></div>
+          <div>
+            Team: <span>{this.props.team}</span> hours wasted - Company: <span>{this.props.company}</span> hours wasted
+          </div>
         }
       </div>
     );
