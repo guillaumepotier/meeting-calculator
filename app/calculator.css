@@ -1,0 +1,8 @@
+.CalculatorBox {
+    padding: 1em;
+    min-width: 250px;
+}
+
+.Grid-row--2 {
+    margin-top: 15px;
+}
