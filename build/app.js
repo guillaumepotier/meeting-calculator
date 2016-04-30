@@ -112,6 +112,17 @@
 	      }
 	    };
 	  },
+	  componentDidMount: function () {
+	    document.getElementById("js-LaunchRightPanel").onclick = function () {
+	      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "false");
+	      document.body.classList.add("u-ovh");
+	    };
+
+	    document.getElementById("js-CloseRightPanel").onclick = function () {
+	      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "true");
+	      document.body.classList.remove("u-ovh");
+	    };
+	  },
 	  onChangeHandle: function (change) {
 
 	    var inputs = Object.assign({}, this.state.inputs, { [change.type]: change.value });
@@ -202,7 +213,7 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'Line Line--labeled' },
+	          { className: 'Line Line--labeled Line--results' },
 	          React.createElement(
 	            'div',
 	            { className: 'Line-label' },
@@ -268,6 +279,79 @@
 	                  )
 	                )
 	              )
+	            )
+	          )
+	        ),
+	        React.createElement('hr', { className: 'Line' }),
+	        React.createElement(
+	          'div',
+	          { className: 'Grid' },
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--6' },
+	            React.createElement(
+	              'p',
+	              { className: 't-caption u-tal' },
+	              React.createElement(
+	                'button',
+	                { id: 'js-LaunchRightPanel', className: 'Btn Btn--outline Btn--s' },
+	                React.createElement('i', { className: 'Btn-icon Icon Icon--like' }),
+	                ' Share'
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--6' },
+	            React.createElement(
+	              'p',
+	              { className: 't-caption u-tar' },
+	              React.createElement(
+	                'a',
+	                { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
+	                'Study made by  ',
+	                React.createElement('i', { className: 'Icon Icon--wisemblyFull' })
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'Panel-wrapper', id: 'js-RightPanel', 'aria-hidden': 'true' },
+	        React.createElement(
+	          'div',
+	          { className: 'Panel' },
+	          React.createElement(
+	            'header',
+	            { className: 'Panel-header' },
+	            React.createElement(
+	              'h3',
+	              { className: 'Panel-title' },
+	              'Share your results'
+	            ),
+	            React.createElement(
+	              'button',
+	              { id: 'js-CloseRightPanel', className: 'Btn Btn--raw PanelHeader-btn u-push', 'aria-label': 'close' },
+	              React.createElement('i', { className: 'Icon Icon--cross' })
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'Panel-content' },
+	            React.createElement(
+	              'p',
+	              { className: 'u-mgt--0' },
+	              'Soon, you\'ll be able to share here your results on the most popular social networks, stay tuned!'
+	            )
+	          ),
+	          React.createElement(
+	            'footer',
+	            { className: 'Panel-footer' },
+	            React.createElement(
+	              'button',
+	              { className: 'Btn Btn--expand' },
+	              'Close'
 	            )
 	          )
 	        )
@@ -344,7 +428,7 @@
 	        { 'for': 'CompanySize', className: 'Label Label--block' },
 	        'Company size'
 	      ),
-	      React.createElement('input', { ref: 'input', type: 'number', value: this.state.size, onChange: this.onChange, name: 'CompanySize', id: 'CompanySize', className: 'Input' })
+	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Number of employees', name: 'CompanySize', id: 'CompanySize', className: 'Input' })
 	    );
 	  }
 	});
@@ -415,7 +499,7 @@
 	        { 'for': 'TeamMembers', className: 'Label Label--block' },
 	        'Team members'
 	      ),
-	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
+	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
 	    );
 	  }
 	});

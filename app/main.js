@@ -67,6 +67,17 @@ var CalculatorBox = React.createClass({
       }
     };
   },
+  componentDidMount: function () {
+    document.getElementById("js-LaunchRightPanel").onclick = function () {
+      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "false");
+      document.body.classList.add("u-ovh");
+    }
+
+    document.getElementById("js-CloseRightPanel").onclick = function(){
+      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "true");
+      document.body.classList.remove("u-ovh");
+    }
+  },
   onChangeHandle: function (change) {
 
     var inputs = Object.assign({}, this.state.inputs, { [change.type]: change.value });
@@ -144,7 +155,7 @@ var CalculatorBox = React.createClass({
           </div>
         </div>
 
-        <div className="Line Line--labeled">
+        <div className="Line Line--labeled Line--results">
           <div className="Line-label">Results</div>
         </div>
 
@@ -170,7 +181,44 @@ var CalculatorBox = React.createClass({
             </div>
           </div>
         </div>
+
+        <hr className="Line" />
+
+        <div className="Grid">
+          <div className="Grid-cell Grid-cell--6">
+            <p className="t-caption u-tal">
+              <button id="js-LaunchRightPanel" className="Btn Btn--outline Btn--s">
+                <i className="Btn-icon Icon Icon--like"></i>
+                &nbsp;Share
+              </button>
+            </p>
+          </div>
+          <div className="Grid-cell Grid-cell--6">
+            <p className="t-caption u-tar">
+              <a href="http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator" target="_blank">Study made by  <i className="Icon Icon--wisemblyFull"></i></a>
+            </p>
+          </div>
+        </div>
+
       </fieldset>
+
+      <div className="Panel-wrapper" id="js-RightPanel" aria-hidden="true">
+          <div className="Panel">
+            <header className="Panel-header">
+              <h3 className="Panel-title">Share your results</h3>
+              <button id="js-CloseRightPanel" className="Btn Btn--raw PanelHeader-btn u-push" aria-label="close">
+                <i className="Icon Icon--cross"></i>
+              </button>
+            </header>
+            <div className="Panel-content">
+              <p className="u-mgt--0">Soon, you'll be able to share here your results on the most popular social networks, stay tuned!</p>
+            </div>
+            <footer className="Panel-footer">
+              <button className="Btn Btn--expand">Close</button>
+            </footer>
+          </div>
+        </div>
+
       </div>
     );
   }
@@ -221,7 +269,7 @@ var CompanySize = React.createClass({
     return (
       <div className="CompanySize">
         <label for="CompanySize" className="Label Label--block">Company size</label>
-        <input ref="input" type="number" value={this.state.size} onChange={this.onChange} name="CompanySize" id="CompanySize" className="Input" />
+        <input ref="input" type="number" onChange={this.onChange} placeholder="Number of employees" name="CompanySize" id="CompanySize" className="Input" />
       </div>
     );
   }
@@ -270,7 +318,7 @@ var TeamMembers = React.createClass({
     return (
       <div className="TeamMembers">
         <label for="TeamMembers" className="Label Label--block">Team members</label>
-        <input ref="input" type="number" onChange={this.onChange} name="TeamMembers" id="TeamMembers" className="Input" />
+        <input ref="input" type="number" onChange={this.onChange}  placeholder="Including you" name="TeamMembers" id="TeamMembers" className="Input" />
       </div>
     );
   }

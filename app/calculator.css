@@ -1,8 +1,17 @@
 .CalculatorBox {
     padding: 1em;
-    min-width: 250px;
+    min-width: 400px;
 }
 
 .Grid-row--2 {
     margin-top: 15px;
+}
+
+.Line--results {
+    margin-top: 20px;
+    margin-bottom: -5px;
+}
+
+.Legend {
+    margin-bottom: 10px;
 }
