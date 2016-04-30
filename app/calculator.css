@@ -1,6 +1,6 @@
 .CalculatorBox {
     padding: 1em;
-    min-width: 400px;
+    min-width: 320px;
 }
 
 .Grid-row--2 {
@@ -14,4 +14,47 @@
 
 .Legend {
     margin-bottom: 10px;
+}
+
+.Dropdown-list {
+    max-height: 15rem;
+}
+
+@media only screen and (max-device-width:481px) {
+    .Legend {
+        font-size: 1.7rem;
+        padding-bottom: 0.5rem;
+    }
+    .Fieldset {
+        margin: 0.5rem;
+    }
+    .Grid-cell {
+        width: 100% !important;
+    }
+    .Grid--share .Grid-cell {
+        width: 50% !important;
+    }
+    .Grid-row--2 {
+        margin-top: 0px;
+    }
+    .Label {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-top: 0.3rem;
+    }
+    .Dropdown-selectInput {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .Dropdown-item {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .Dropdown-list {
+        max-height: 15rem;
+    }
+    .Input {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
 }

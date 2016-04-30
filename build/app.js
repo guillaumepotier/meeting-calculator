@@ -113,15 +113,15 @@
 	    };
 	  },
 	  componentDidMount: function () {
-	    document.getElementById("js-LaunchRightPanel").onclick = function () {
+	    $("#js-LaunchRightPanel").on('click', function () {
 	      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "false");
 	      document.body.classList.add("u-ovh");
-	    };
+	    });
 
-	    document.getElementById("js-CloseRightPanel").onclick = function () {
+	    $(".js-CloseRightPanel").on('click', function () {
 	      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "true");
 	      document.body.classList.remove("u-ovh");
-	    };
+	    });
 	  },
 	  onChangeHandle: function (change) {
 
@@ -285,7 +285,7 @@
 	        React.createElement('hr', { className: 'Line' }),
 	        React.createElement(
 	          'div',
-	          { className: 'Grid' },
+	          { className: 'Grid Grid--share' },
 	          React.createElement(
 	            'div',
 	            { className: 'Grid-cell Grid-cell--6' },
@@ -332,7 +332,7 @@
 	            ),
 	            React.createElement(
 	              'button',
-	              { id: 'js-CloseRightPanel', className: 'Btn Btn--raw PanelHeader-btn u-push', 'aria-label': 'close' },
+	              { className: 'Btn Btn--raw PanelHeader-btn u-push js-CloseRightPanel', 'aria-label': 'close' },
 	              React.createElement('i', { className: 'Icon Icon--cross' })
 	            )
 	          ),
@@ -350,7 +350,7 @@
 	            { className: 'Panel-footer' },
 	            React.createElement(
 	              'button',
-	              { className: 'Btn Btn--expand' },
+	              { className: 'Btn Btn--expand js-CloseRightPanel' },
 	              'Close'
 	            )
 	          )

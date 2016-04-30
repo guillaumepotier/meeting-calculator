@@ -68,15 +68,15 @@ var CalculatorBox = React.createClass({
     };
   },
   componentDidMount: function () {
-    document.getElementById("js-LaunchRightPanel").onclick = function () {
+    $("#js-LaunchRightPanel").on('click', function () {
       document.getElementById("js-RightPanel").setAttribute("aria-hidden", "false");
       document.body.classList.add("u-ovh");
-    }
+    });
 
-    document.getElementById("js-CloseRightPanel").onclick = function(){
+    $(".js-CloseRightPanel").on('click', function () {
       document.getElementById("js-RightPanel").setAttribute("aria-hidden", "true");
       document.body.classList.remove("u-ovh");
-    }
+    });
   },
   onChangeHandle: function (change) {
 
@@ -184,7 +184,7 @@ var CalculatorBox = React.createClass({
 
         <hr className="Line" />
 
-        <div className="Grid">
+        <div className="Grid Grid--share">
           <div className="Grid-cell Grid-cell--6">
             <p className="t-caption u-tal">
               <button id="js-LaunchRightPanel" className="Btn Btn--outline Btn--s">
@@ -206,7 +206,7 @@ var CalculatorBox = React.createClass({
           <div className="Panel">
             <header className="Panel-header">
               <h3 className="Panel-title">Share your results</h3>
-              <button id="js-CloseRightPanel" className="Btn Btn--raw PanelHeader-btn u-push" aria-label="close">
+              <button className="Btn Btn--raw PanelHeader-btn u-push js-CloseRightPanel" aria-label="close">
                 <i className="Icon Icon--cross"></i>
               </button>
             </header>
@@ -214,7 +214,7 @@ var CalculatorBox = React.createClass({
               <p className="u-mgt--0">Soon, you'll be able to share here your results on the most popular social networks, stay tuned!</p>
             </div>
             <footer className="Panel-footer">
-              <button className="Btn Btn--expand">Close</button>
+              <button className="Btn Btn--expand js-CloseRightPanel">Close</button>
             </footer>
           </div>
         </div>
