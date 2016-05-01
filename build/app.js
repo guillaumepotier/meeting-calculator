@@ -100,7 +100,9 @@
 	  },
 	  componentDidMount: function () {},
 	  onChangeHandle: function (change) {
-	    var inputs = Object.assign({}, this.state.inputs, { [change.type]: change.value });
+	    var inputs = Object.assign({}, this.state.inputs);
+	    inputs[change.type] = change.value;
+
 	    var sharing = !!inputs.sector && !!inputs.size && !!inputs.department && !!inputs.team;
 
 	    this.setState(function () {
