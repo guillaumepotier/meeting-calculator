@@ -5,6 +5,16 @@ var ReactDOM = require('react-dom');
 
 var abacus = require('./abacus');
 
+var sharing = require('./sharing');
+var components = require('./components');
+
+var CompanySector = components.CompanySector,
+    CompanySize =  components.CompanySize,
+    CompanyDepartment= components.CompanyDepartment,
+    TeamMembers = components.TeamMembers;
+
+var TwitterButton = sharing.TwitterButton;
+
 /**
  * Number.prototype.format(n, x, s, c)
  *
@@ -23,6 +33,7 @@ Number.prototype.format = function(n, x, s, c) {
 var CalculatorBox = React.createClass({
   getInitialState: function () {
     return {
+      sharing: false,
       team: {
         hours: 0,
         money: 0
@@ -40,26 +51,16 @@ var CalculatorBox = React.createClass({
     };
   },
   componentDidMount: function () {
-    $("#js-LaunchRightPanel").on('click', function () {
-      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "false");
-      document.body.classList.add("u-ovh");
-    });
-
-    $(".js-CloseRightPanel").on('click', function () {
-      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "true");
-      document.body.classList.remove("u-ovh");
-    });
-
-    $('.js-share').on('click', function () {
-      console.log($(this).data('share'));
-    });
   },
   onChangeHandle: function (change) {
-
     var inputs = Object.assign({}, this.state.inputs, { [change.type]: change.value });
-    this.setState({ inputs: inputs });
+    var sharing = !!inputs.sector && !!inputs.size && !!inputs.department && !!inputs.team;
 
-    if (!inputs.sector || !inputs.size || !inputs.department || !inputs.team)
+    this.setState(function () {
+      return { inputs: inputs, sharing: sharing };
+    });
+
+    if (!sharing)
       return;
 
     var size = inputs.size;
@@ -160,14 +161,11 @@ var CalculatorBox = React.createClass({
 
         <hr className="Line" />
 
-        <div className="Grid Grid--share">
+        <div className="Grid Grid--share f">
           <div className="Grid-cell Grid-cell--3">
-            <p className="t-caption u-tal">
-              <button id="js-LaunchRightPanel" className="Btn Btn--outline Btn--s Btn--primary">
-                <i className="Btn-icon Icon Icon--like"></i>
-                &nbsp;Share
-              </button>
-            </p>
+            <div ref="sharebuttons" className="t-caption u-tal">
+              <TwitterButton sharing={this.state.sharing} url={window.location.href} text={'My team and I just lost £ ' + this.state.team.money + ' worth in unproductive meetings this year, and you?'} />
+            </div>
           </div>
           <div className="Grid-cell Grid-cell--9">
             <p className="t-caption u-tar">
@@ -177,139 +175,6 @@ var CalculatorBox = React.createClass({
         </div>
 
       </fieldset>
-
-      <div className="Panel-wrapper" id="js-RightPanel" aria-hidden="true">
-          <div className="Panel">
-            <header className="Panel-header">
-              <h3 className="Panel-title">Share your results</h3>
-              <button className="Btn Btn--raw PanelHeader-btn u-push js-CloseRightPanel" aria-label="close">
-                <i className="Icon Icon--cross"></i>
-              </button>
-            </header>
-            <div className="Panel-content">
-              <p className="u-mgt--0">
-                <button data-share="twitter" className="Btn Btn--outline Btn--primary js-share">
-                  <i className="Btn-icon Icon Icon--twitter"></i>
-                  &nbsp;Tweet
-                </button>
-
-                <button data-share="linkedin" className="Btn Btn--outline Btn--primary js-share">
-                  <i className="Btn-icon Icon Icon--linkedin"></i>
-                  &nbsp;Share
-                </button>
-
-                <button data-share="facebook" className="Btn Btn--outline Btn--primary js-share">
-                  <i className="Btn-icon Icon Icon--facebook"></i>
-                  &nbsp;Share
-                </button>
-              </p>
-            </div>
-            <footer className="Panel-footer">
-              <button className="Btn Btn--expand js-CloseRightPanel">Close</button>
-            </footer>
-          </div>
-        </div>
-
-      </div>
-    );
-  }
-});
-
-var CompanySector = React.createClass({
-  getInitialState: function () {
-    return {
-        sectors: ['Publishers', 'Aeronautics/Defense', 'B2B Technology', 'Banking and Insurance', 'Consumer Technology', 'Professional Services', 'Energy', 'Finance', 'Travel and Leisure', 'Industrial', 'Food and Beverages', 'Retail / eCommerce', 'Construction', 'Transportation', 'Pharma and Biotech']
-    };
-  },
-  // fucking jQuery hack to support Tapestry select..
-  componentDidMount: function () {
-    $('#CompanySector').on('change', function (e) {
-      this.onChange(e);
-    }.bind(this));
-  },
-  onChange: function (e) {
-    this.setState({ sector: this.refs.select.value });
-    this.props.onInputChange({ type: 'sector', value: this.refs.select.value });
-  },
-  render: function () {
-    return (
-      <div className="CompanySector">
-        <label for="CompanySector" className="Label Label--block">Company sector</label>
-        <select ref="select" type="select" onChange={this.onChange} name="CompanySector" id="CompanySector" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
-          <option value="">Please choose..</option>
-          {this.state.sectors.map(function (sector, index) {
-            return <option key={index} value={index}>{sector}</option>;
-          })}
-        </select>
-      </div>
-    );
-  }
-});
-
-var CompanySize = React.createClass({
-  getInitialState: function () {
-    return {
-      size: 1
-    };
-  },
-  onChange: function (e) {
-    this.setState({ size: this.refs.input.value });
-    this.props.onInputChange({ type: 'size', value: this.refs.input.value });
-  },
-  render: function () {
-    return (
-      <div className="CompanySize">
-        <label for="CompanySize" className="Label Label--block">Company size</label>
-        <input ref="input" type="number" onChange={this.onChange} placeholder="Number of employees" name="CompanySize" id="CompanySize" className="Input" />
-      </div>
-    );
-  }
-});
-
-var CompanyDepartment = React.createClass({
-  getInitialState: function () {
-    return {
-      departments: ['HR', 'Marketing', 'Events and communications', 'Legal', 'Sales', 'Technology, Digital and innovation', 'IT', 'Finance', 'Operational service']
-    };
-  },
-  // fucking jQuery hack to support Tapestry select..
-  componentDidMount: function () {
-    $('#CompanyDepartment').on('change', function (e) {
-      this.onChange(e);
-    }.bind(this));
-  },
-  onChange: function (e) {
-    this.setState({ department: this.refs.select.value });
-    this.props.onInputChange({ type: 'department', value: this.refs.select.value });
-  },
-  render: function () {
-    return (
-      <div className="CompanyDepartment">
-        <label for="CompanyDepartment" className="Label Label--block">Company department</label>
-        <select ref="select" type="select" onChange={this.onChange} name="CompanyDepartment" id="CompanyDepartment" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
-          <option value="">Please choose..</option>
-          {this.state.departments.map(function (department, index) {
-            return <option key={index} value={index}>{department}</option>;
-          })}
-        </select>
-      </div>
-    );
-  }
-});
-
-var TeamMembers = React.createClass({
-  getInitialState: function () {
-    return { members: '' };
-  },
-  onChange: function (e) {
-    this.setState({ team: this.refs.input.value });
-    this.props.onInputChange({ type: 'team', value: this.refs.input.value });
-  },
-  render: function () {
-    return (
-      <div className="TeamMembers">
-        <label for="TeamMembers" className="Label Label--block">Team members</label>
-        <input ref="input" type="number" onChange={this.onChange}  placeholder="Including you" name="TeamMembers" id="TeamMembers" className="Input" />
       </div>
     );
   }

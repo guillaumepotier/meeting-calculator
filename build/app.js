@@ -51,6 +51,16 @@
 
 	var abacus = __webpack_require__(165);
 
+	var sharing = __webpack_require__(166);
+	var components = __webpack_require__(167);
+
+	var CompanySector = components.CompanySector,
+	    CompanySize = components.CompanySize,
+	    CompanyDepartment = components.CompanyDepartment,
+	    TeamMembers = components.TeamMembers;
+
+	var TwitterButton = sharing.TwitterButton;
+
 	/**
 	 * Number.prototype.format(n, x, s, c)
 	 *
@@ -71,6 +81,7 @@
 
 	  getInitialState: function () {
 	    return {
+	      sharing: false,
 	      team: {
 	        hours: 0,
 	        money: 0
@@ -87,27 +98,16 @@
 	      }
 	    };
 	  },
-	  componentDidMount: function () {
-	    $("#js-LaunchRightPanel").on('click', function () {
-	      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "false");
-	      document.body.classList.add("u-ovh");
-	    });
-
-	    $(".js-CloseRightPanel").on('click', function () {
-	      document.getElementById("js-RightPanel").setAttribute("aria-hidden", "true");
-	      document.body.classList.remove("u-ovh");
-	    });
-
-	    $('.js-share').on('click', function () {
-	      console.log($(this).data('share'));
-	    });
-	  },
+	  componentDidMount: function () {},
 	  onChangeHandle: function (change) {
-
 	    var inputs = Object.assign({}, this.state.inputs, { [change.type]: change.value });
-	    this.setState({ inputs: inputs });
+	    var sharing = !!inputs.sector && !!inputs.size && !!inputs.department && !!inputs.team;
 
-	    if (!inputs.sector || !inputs.size || !inputs.department || !inputs.team) return;
+	    this.setState(function () {
+	      return { inputs: inputs, sharing: sharing };
+	    });
+
+	    if (!sharing) return;
 
 	    var size = inputs.size;
 	    var category = abacus.sizes.length;
@@ -264,19 +264,14 @@
 	        React.createElement('hr', { className: 'Line' }),
 	        React.createElement(
 	          'div',
-	          { className: 'Grid Grid--share' },
+	          { className: 'Grid Grid--share f' },
 	          React.createElement(
 	            'div',
 	            { className: 'Grid-cell Grid-cell--3' },
 	            React.createElement(
-	              'p',
-	              { className: 't-caption u-tal' },
-	              React.createElement(
-	                'button',
-	                { id: 'js-LaunchRightPanel', className: 'Btn Btn--outline Btn--s Btn--primary' },
-	                React.createElement('i', { className: 'Btn-icon Icon Icon--like' }),
-	                ' Share'
-	              )
+	              'div',
+	              { ref: 'sharebuttons', className: 't-caption u-tal' },
+	              React.createElement(TwitterButton, { sharing: this.state.sharing, url: window.location.href, text: 'My team and I just lost £ ' + this.state.team.money + ' worth in unproductive meetings this year, and you?' })
 	            )
 	          ),
 	          React.createElement(
@@ -294,208 +289,7 @@
 	            )
 	          )
 	        )
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'Panel-wrapper', id: 'js-RightPanel', 'aria-hidden': 'true' },
-	        React.createElement(
-	          'div',
-	          { className: 'Panel' },
-	          React.createElement(
-	            'header',
-	            { className: 'Panel-header' },
-	            React.createElement(
-	              'h3',
-	              { className: 'Panel-title' },
-	              'Share your results'
-	            ),
-	            React.createElement(
-	              'button',
-	              { className: 'Btn Btn--raw PanelHeader-btn u-push js-CloseRightPanel', 'aria-label': 'close' },
-	              React.createElement('i', { className: 'Icon Icon--cross' })
-	            )
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'Panel-content' },
-	            React.createElement(
-	              'p',
-	              { className: 'u-mgt--0' },
-	              React.createElement(
-	                'button',
-	                { 'data-share': 'twitter', className: 'Btn Btn--outline Btn--primary js-share' },
-	                React.createElement('i', { className: 'Btn-icon Icon Icon--twitter' }),
-	                ' Tweet'
-	              ),
-	              React.createElement(
-	                'button',
-	                { 'data-share': 'linkedin', className: 'Btn Btn--outline Btn--primary js-share' },
-	                React.createElement('i', { className: 'Btn-icon Icon Icon--linkedin' }),
-	                ' Share'
-	              ),
-	              React.createElement(
-	                'button',
-	                { 'data-share': 'facebook', className: 'Btn Btn--outline Btn--primary js-share' },
-	                React.createElement('i', { className: 'Btn-icon Icon Icon--facebook' }),
-	                ' Share'
-	              )
-	            )
-	          ),
-	          React.createElement(
-	            'footer',
-	            { className: 'Panel-footer' },
-	            React.createElement(
-	              'button',
-	              { className: 'Btn Btn--expand js-CloseRightPanel' },
-	              'Close'
-	            )
-	          )
-	        )
 	      )
-	    );
-	  }
-	});
-
-	var CompanySector = React.createClass({
-	  displayName: 'CompanySector',
-
-	  getInitialState: function () {
-	    return {
-	      sectors: ['Publishers', 'Aeronautics/Defense', 'B2B Technology', 'Banking and Insurance', 'Consumer Technology', 'Professional Services', 'Energy', 'Finance', 'Travel and Leisure', 'Industrial', 'Food and Beverages', 'Retail / eCommerce', 'Construction', 'Transportation', 'Pharma and Biotech']
-	    };
-	  },
-	  // fucking jQuery hack to support Tapestry select..
-	  componentDidMount: function () {
-	    $('#CompanySector').on('change', function (e) {
-	      this.onChange(e);
-	    }.bind(this));
-	  },
-	  onChange: function (e) {
-	    this.setState({ sector: this.refs.select.value });
-	    this.props.onInputChange({ type: 'sector', value: this.refs.select.value });
-	  },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'CompanySector' },
-	      React.createElement(
-	        'label',
-	        { 'for': 'CompanySector', className: 'Label Label--block' },
-	        'Company sector'
-	      ),
-	      React.createElement(
-	        'select',
-	        { ref: 'select', type: 'select', onChange: this.onChange, name: 'CompanySector', id: 'CompanySector', className: 'Dropdown Dropdown--block', 'data-tapestry': 'dropdown-select' },
-	        React.createElement(
-	          'option',
-	          { value: '' },
-	          'Please choose..'
-	        ),
-	        this.state.sectors.map(function (sector, index) {
-	          return React.createElement(
-	            'option',
-	            { key: index, value: index },
-	            sector
-	          );
-	        })
-	      )
-	    );
-	  }
-	});
-
-	var CompanySize = React.createClass({
-	  displayName: 'CompanySize',
-
-	  getInitialState: function () {
-	    return {
-	      size: 1
-	    };
-	  },
-	  onChange: function (e) {
-	    this.setState({ size: this.refs.input.value });
-	    this.props.onInputChange({ type: 'size', value: this.refs.input.value });
-	  },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'CompanySize' },
-	      React.createElement(
-	        'label',
-	        { 'for': 'CompanySize', className: 'Label Label--block' },
-	        'Company size'
-	      ),
-	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Number of employees', name: 'CompanySize', id: 'CompanySize', className: 'Input' })
-	    );
-	  }
-	});
-
-	var CompanyDepartment = React.createClass({
-	  displayName: 'CompanyDepartment',
-
-	  getInitialState: function () {
-	    return {
-	      departments: ['HR', 'Marketing', 'Events and communications', 'Legal', 'Sales', 'Technology, Digital and innovation', 'IT', 'Finance', 'Operational service']
-	    };
-	  },
-	  // fucking jQuery hack to support Tapestry select..
-	  componentDidMount: function () {
-	    $('#CompanyDepartment').on('change', function (e) {
-	      this.onChange(e);
-	    }.bind(this));
-	  },
-	  onChange: function (e) {
-	    this.setState({ department: this.refs.select.value });
-	    this.props.onInputChange({ type: 'department', value: this.refs.select.value });
-	  },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'CompanyDepartment' },
-	      React.createElement(
-	        'label',
-	        { 'for': 'CompanyDepartment', className: 'Label Label--block' },
-	        'Company department'
-	      ),
-	      React.createElement(
-	        'select',
-	        { ref: 'select', type: 'select', onChange: this.onChange, name: 'CompanyDepartment', id: 'CompanyDepartment', className: 'Dropdown Dropdown--block', 'data-tapestry': 'dropdown-select' },
-	        React.createElement(
-	          'option',
-	          { value: '' },
-	          'Please choose..'
-	        ),
-	        this.state.departments.map(function (department, index) {
-	          return React.createElement(
-	            'option',
-	            { key: index, value: index },
-	            department
-	          );
-	        })
-	      )
-	    );
-	  }
-	});
-
-	var TeamMembers = React.createClass({
-	  displayName: 'TeamMembers',
-
-	  getInitialState: function () {
-	    return { members: '' };
-	  },
-	  onChange: function (e) {
-	    this.setState({ team: this.refs.input.value });
-	    this.props.onInputChange({ type: 'team', value: this.refs.input.value });
-	  },
-	  render: function () {
-	    return React.createElement(
-	      'div',
-	      { className: 'TeamMembers' },
-	      React.createElement(
-	        'label',
-	        { 'for': 'TeamMembers', className: 'Label Label--block' },
-	        'Team members'
-	      ),
-	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
 	    );
 	  }
 	});
@@ -20336,6 +20130,215 @@
 	  [6.24, 0.86, 43] // More than 500, please specify
 	  ],
 	  sizes: [9, 49, 99, 249, 500]
+	};
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var TwitterButton = React.createClass({
+	  displayName: "TwitterButton",
+
+	  getInitialState: function () {
+	    return { initalized: false };
+	  },
+	  componentWillReceiveProps: function (nextProps) {
+	    if (!nextProps.sharing) return;
+
+	    // do not re-render button if text is unchanged
+	    if (nextProps.text === this.props.text) return;
+
+	    if (this.state.initalized) {
+	      this.componentWillUnmount();
+	      this.renderWidget(nextProps);
+	      twttr.widgets.load();
+	      return;
+	    }
+
+	    var twitterbutton = this.refs.twitterbutton;
+	    var twitterscript = document.createElement("script");
+	    twitterscript.src = "//platform.twitter.com/widgets.js";
+	    twitterscript.id = 'twitter-wjs';
+	    twitterscript.onload = this.renderWidget;
+	    twitterbutton.parentNode.appendChild(twitterscript);
+
+	    this.setState({ initalized: true });
+	  },
+	  componentWillUnmount: function () {
+	    let elem = $('.twitter-share-button');
+	    if (elem.length) elem.remove();
+	  },
+	  renderWidget: function (nextProps) {
+	    let props = nextProps ? nextProps : this.props;
+
+	    twttr.widgets.createShareButton(props.url, this.refs.twitterbutton, { text: props.text });
+	  },
+	  render: function () {
+	    return React.createElement("div", { ref: "twitterbutton" });
+	  }
+	});
+
+	module.exports = {
+	  TwitterButton: TwitterButton
+	};
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var CompanySector = React.createClass({
+	  displayName: 'CompanySector',
+
+	  getInitialState: function () {
+	    return {
+	      sectors: ['Publishers', 'Aeronautics/Defense', 'B2B Technology', 'Banking and Insurance', 'Consumer Technology', 'Professional Services', 'Energy', 'Finance', 'Travel and Leisure', 'Industrial', 'Food and Beverages', 'Retail / eCommerce', 'Construction', 'Transportation', 'Pharma and Biotech']
+	    };
+	  },
+	  // fucking jQuery hack to support Tapestry select..
+	  componentDidMount: function () {
+	    $('#CompanySector').on('change', function (e) {
+	      this.onChange(e);
+	    }.bind(this));
+	  },
+	  onChange: function (e) {
+	    this.setState({ sector: this.refs.select.value });
+	    this.props.onInputChange({ type: 'sector', value: this.refs.select.value });
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'CompanySector' },
+	      React.createElement(
+	        'label',
+	        { 'for': 'CompanySector', className: 'Label Label--block' },
+	        'Company sector'
+	      ),
+	      React.createElement(
+	        'select',
+	        { ref: 'select', type: 'select', onChange: this.onChange, name: 'CompanySector', id: 'CompanySector', className: 'Dropdown Dropdown--block', 'data-tapestry': 'dropdown-select' },
+	        React.createElement(
+	          'option',
+	          { value: '' },
+	          'Please choose..'
+	        ),
+	        this.state.sectors.map(function (sector, index) {
+	          return React.createElement(
+	            'option',
+	            { key: index, value: index },
+	            sector
+	          );
+	        })
+	      )
+	    );
+	  }
+	});
+
+	var CompanySize = React.createClass({
+	  displayName: 'CompanySize',
+
+	  getInitialState: function () {
+	    return {
+	      size: 1
+	    };
+	  },
+	  onChange: function (e) {
+	    this.setState({ size: this.refs.input.value });
+	    this.props.onInputChange({ type: 'size', value: this.refs.input.value });
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'CompanySize' },
+	      React.createElement(
+	        'label',
+	        { 'for': 'CompanySize', className: 'Label Label--block' },
+	        'Company size'
+	      ),
+	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Number of employees', name: 'CompanySize', id: 'CompanySize', className: 'Input' })
+	    );
+	  }
+	});
+
+	var CompanyDepartment = React.createClass({
+	  displayName: 'CompanyDepartment',
+
+	  getInitialState: function () {
+	    return {
+	      departments: ['HR', 'Marketing', 'Events and communications', 'Legal', 'Sales', 'Technology, Digital and innovation', 'IT', 'Finance', 'Operational service']
+	    };
+	  },
+	  // fucking jQuery hack to support Tapestry select..
+	  componentDidMount: function () {
+	    $('#CompanyDepartment').on('change', function (e) {
+	      this.onChange(e);
+	    }.bind(this));
+	  },
+	  onChange: function (e) {
+	    this.setState({ department: this.refs.select.value });
+	    this.props.onInputChange({ type: 'department', value: this.refs.select.value });
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'CompanyDepartment' },
+	      React.createElement(
+	        'label',
+	        { 'for': 'CompanyDepartment', className: 'Label Label--block' },
+	        'Company department'
+	      ),
+	      React.createElement(
+	        'select',
+	        { ref: 'select', type: 'select', onChange: this.onChange, name: 'CompanyDepartment', id: 'CompanyDepartment', className: 'Dropdown Dropdown--block', 'data-tapestry': 'dropdown-select' },
+	        React.createElement(
+	          'option',
+	          { value: '' },
+	          'Please choose..'
+	        ),
+	        this.state.departments.map(function (department, index) {
+	          return React.createElement(
+	            'option',
+	            { key: index, value: index },
+	            department
+	          );
+	        })
+	      )
+	    );
+	  }
+	});
+
+	var TeamMembers = React.createClass({
+	  displayName: 'TeamMembers',
+
+	  getInitialState: function () {
+	    return { members: '' };
+	  },
+	  onChange: function (e) {
+	    this.setState({ team: this.refs.input.value });
+	    this.props.onInputChange({ type: 'team', value: this.refs.input.value });
+	  },
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'TeamMembers' },
+	      React.createElement(
+	        'label',
+	        { 'for': 'TeamMembers', className: 'Label Label--block' },
+	        'Team members'
+	      ),
+	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
+	    );
+	  }
+	});
+
+	module.exports = {
+	  CompanySector: CompanySector,
+	  CompanySize: CompanySize,
+	  CompanyDepartment: CompanyDepartment,
+	  TeamMembers: TeamMembers
 	};
 
 /***/ }
