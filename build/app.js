@@ -20169,11 +20169,11 @@
 	    this.setState({ initalized: true });
 	  },
 	  componentWillUnmount: function () {
-	    let elem = $('.twitter-share-button');
+	    var elem = $('.twitter-share-button');
 	    if (elem.length) elem.remove();
 	  },
 	  renderWidget: function (nextProps) {
-	    let props = nextProps ? nextProps : this.props;
+	    var props = nextProps ? nextProps : this.props;
 
 	    twttr.widgets.createShareButton(props.url, this.refs.twitterbutton, { text: props.text });
 	  },
