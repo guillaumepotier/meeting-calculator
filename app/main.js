@@ -88,7 +88,8 @@ var CalculatorBox = React.createClass({
       results.avgDuration * // avg meeting duraction
       results.percentUnproductive / 100 * // % improductive meetings
       48 *
-      inputs.team; // team members
+      inputs.team * // team members
+      abacus.sector[inputs.sector][3] / 100; // % white collar
 
     var company =
       results.weeklyMeetings * // weekly meeting

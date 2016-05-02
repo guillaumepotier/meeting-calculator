@@ -6,6 +6,7 @@ module.exports =  {
     path: __dirname + '/build',
     filename: 'app.js'
   },
+  devtool: 'source-maps',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
