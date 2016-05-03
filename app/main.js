@@ -134,8 +134,8 @@ var CalculatorBox = React.createClass({
             <div className="Grid-cell Grid-cell--6">
               <CompanySector onInputChange={this.onChangeHandle} />
             </div>
-            <div className="Grid-cell Grid-cell--2"></div>
-            <div className="Grid-cell Grid-cell--4">
+            <div className="Grid-cell Grid-cell--1"></div>
+            <div className="Grid-cell Grid-cell--5">
               <CompanySize onInputChange={this.onChangeHandle} />
             </div>
           </div>
@@ -143,8 +143,8 @@ var CalculatorBox = React.createClass({
             <div className="Grid-cell Grid-cell--6">
               <CompanyDepartment onInputChange={this.onChangeHandle} />
             </div>
-            <div className="Grid-cell Grid-cell--2"></div>
-            <div className="Grid-cell Grid-cell--4">
+            <div className="Grid-cell Grid-cell--1"></div>
+            <div className="Grid-cell Grid-cell--5">
               <TeamMembers onInputChange={this.onChangeHandle} />
             </div>
           </div>
@@ -182,7 +182,7 @@ var CalculatorBox = React.createClass({
             </div>
 
             <div className="Grid-cell Grid-cell--3 u-tac">
-              <button className="Btn Btn--s Btn--validate">Contact us</button>
+              <a href="mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers" className="Btn Btn--s Btn--validate">Contact us</a>
             </div>
           </div>
 
@@ -195,7 +195,7 @@ var CalculatorBox = React.createClass({
           <div className="Grid Grid--footer u-vam">
             <div className="Grid-cell Grid-cell--4">
               <p className="t-caption t-caption--copy">
-                <a href="http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator" target="_blank">Wisembly 2016 Survey<br/>conducted by Censuswide</a>
+                <a href="http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator" target="_blank">Wisembly 2016 Survey<br/>conducted by Censuswide</a>
               </p>
             </div>
 

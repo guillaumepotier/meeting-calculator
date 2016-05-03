@@ -99,8 +99,8 @@ var TeamMembers = React.createClass({
   render: function () {
     return (
       <div className="TeamMembers">
-        <label for="TeamMembers" className="Label Label--block">Team members</label>
-        <input ref="input" type="text" pattern="[0-9]*" onChange={this.onChange} placeholder="People running meetings, including you" name="TeamMembers" id="TeamMembers" className="Input" />
+        <label for="TeamMembers" className="Label Label--block">Team members (including you)</label>
+        <input ref="input" type="text" pattern="[0-9]*" onChange={this.onChange} placeholder="Running meetings" name="TeamMembers" id="TeamMembers" className="Input" />
       </div>
     );
   }

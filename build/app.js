@@ -191,10 +191,10 @@
 	            { className: 'Grid-cell Grid-cell--6' },
 	            React.createElement(CompanySector, { onInputChange: this.onChangeHandle })
 	          ),
-	          React.createElement('div', { className: 'Grid-cell Grid-cell--2' }),
+	          React.createElement('div', { className: 'Grid-cell Grid-cell--1' }),
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--4' },
+	            { className: 'Grid-cell Grid-cell--5' },
 	            React.createElement(CompanySize, { onInputChange: this.onChangeHandle })
 	          )
 	        ),
@@ -206,10 +206,10 @@
 	            { className: 'Grid-cell Grid-cell--6' },
 	            React.createElement(CompanyDepartment, { onInputChange: this.onChangeHandle })
 	          ),
-	          React.createElement('div', { className: 'Grid-cell Grid-cell--2' }),
+	          React.createElement('div', { className: 'Grid-cell Grid-cell--1' }),
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--4' },
+	            { className: 'Grid-cell Grid-cell--5' },
 	            React.createElement(TeamMembers, { onInputChange: this.onChangeHandle })
 	          )
 	        ),
@@ -297,8 +297,8 @@
 	            'div',
 	            { className: 'Grid-cell Grid-cell--3 u-tac' },
 	            React.createElement(
-	              'button',
-	              { className: 'Btn Btn--s Btn--validate' },
+	              'a',
+	              { href: 'mailto:contact@wisembly.com?subject=Let\'s start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers', className: 'Btn Btn--s Btn--validate' },
 	              'Contact us'
 	            )
 	          )
@@ -323,7 +323,7 @@
 	              { className: 't-caption t-caption--copy' },
 	              React.createElement(
 	                'a',
-	                { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
+	                { href: 'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
 	                'Wisembly 2016 Survey',
 	                React.createElement('br', null),
 	                'conducted by Censuswide'
@@ -20446,9 +20446,9 @@
 	      React.createElement(
 	        'label',
 	        { 'for': 'TeamMembers', className: 'Label Label--block' },
-	        'Team members'
+	        'Team members (including you)'
 	      ),
-	      React.createElement('input', { ref: 'input', type: 'text', pattern: '[0-9]*', onChange: this.onChange, placeholder: 'People running meetings, including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
+	      React.createElement('input', { ref: 'input', type: 'text', pattern: '[0-9]*', onChange: this.onChange, placeholder: 'Running meetings', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
 	    );
 	  }
 	});

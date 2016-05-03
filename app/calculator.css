@@ -19,6 +19,10 @@
     margin: 0.4rem 0;
 }
 
+.Box {
+    border: none;
+}
+
 .Box-header {
     color: #fff;
     font-weight: 500;
@@ -86,6 +90,10 @@
     text-align: left !important;
 }
 
+.Grid-cell--hours, .Grid-cell--money {
+    text-align: left  !important;
+}
+
 .Grid--expertise {
     margin-top: 1.5rem;
 }
@@ -144,6 +152,9 @@
     .Grid-cell--title {
         margin-top: 0.2rem;
         margin-bottom: 1px;
+    }
+    .Grid-cell--money {
+        text-align: right !important;
     }
     .Grid--share .Grid-cell {
         width: 50% !important;
