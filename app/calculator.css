@@ -24,16 +24,12 @@
 }
 
 .Logo {
-    width: 220px;
-    margin: 0.5rem;
+    width: 200px;
+    margin: 0.4rem;
 }
 
 .Grid-row--2 {
     margin: 0.9rem 0;
-}
-
-.Grid-cell--line {
-    padding: 0.7rem 0 0 0;
 }
 
 .Line--results {
@@ -102,7 +98,7 @@
     font-weight: 500;
 }
 
-.t-caption--copy {
+.t-caption--copy, .t-caption--share {
     margin-top: 15px;
 }
 
@@ -151,5 +147,18 @@
     .Input {
         font-size: 1.5rem;
         line-height: 2rem;
+    }
+    .Box-header {
+        font-size: 1.1rem;
+    }
+    .Grid-cell--discuss {
+        text-align: center;
+    }
+    .Grid-cell--header {
+        margin-bottom: 0.5rem;
+    }
+    .Grid--footer .Grid-cell {
+        height: 3.5rem;
+        text-align: center;
     }
 }

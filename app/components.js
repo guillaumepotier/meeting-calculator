@@ -21,7 +21,7 @@ var CompanySector = React.createClass({
       <div className="CompanySector">
         <label for="CompanySector" className="Label Label--block">Company sector</label>
         <select ref="select" type="select" onChange={this.onChange} name="CompanySector" id="CompanySector" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
-          <option value="">Please choose..</option>
+          <option value="">Please choose</option>
           {this.state.sectors.map(function (sector, index) {
             return <option key={index} value={index}>{sector}</option>;
           })}
@@ -72,7 +72,7 @@ var CompanyDepartment = React.createClass({
       <div className="CompanyDepartment">
         <label for="CompanyDepartment" className="Label Label--block">Company department</label>
         <select ref="select" type="select" onChange={this.onChange} name="CompanyDepartment" id="CompanyDepartment" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
-          <option value="">Please choose..</option>
+          <option value="">Please choose</option>
           {this.state.departments.map(function (department, index) {
             return <option key={index} value={index}>{department}</option>;
           })}

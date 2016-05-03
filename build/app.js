@@ -298,14 +298,13 @@
 	          { className: 'Grid Grid--expertise' },
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--7' },
+	            { className: 'Grid-cell Grid-cell--9 Grid-cell--discuss' },
 	            React.createElement(
 	              'p',
 	              null,
 	              'Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.'
 	            )
 	          ),
-	          React.createElement('div', { className: 'Grid-cell Grid-cell--2 u-tac' }),
 	          React.createElement(
 	            'div',
 	            { className: 'Grid-cell Grid-cell--3 u-tac' },
@@ -330,10 +329,10 @@
 	          { className: 'Grid Grid--footer u-vam' },
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--4 u-tal' },
+	            { className: 'Grid-cell Grid-cell--4' },
 	            React.createElement(
 	              'p',
-	              { className: 't-caption u-tal t-caption--copy' },
+	              { className: 't-caption t-caption--copy' },
 	              React.createElement(
 	                'a',
 	                { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
@@ -345,15 +344,34 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--4 u-tac' },
-	            React.createElement('img', { className: 'wisembly-logo', src: './assets/wisembly-logo.png' })
+	            { className: 'Grid-cell Grid-cell--4' },
+	            React.createElement(
+	              'a',
+	              { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
+	              React.createElement('img', { className: 'wisembly-logo', src: './assets/wisembly-logo.png' })
+	            )
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--4 u-tar' },
+	            { className: 'Grid-cell Grid-cell--4' },
 	            React.createElement(
 	              'div',
-	              { ref: 'sharebuttons', className: 't-caption u-tar' },
+	              { className: 't-caption t-caption--share' },
+	              React.createElement(
+	                'button',
+	                { className: 'Btn Btn--s Btn--outline Btn--circle' },
+	                React.createElement('i', { className: 'Icon Icon--linkedin' })
+	              ),
+	              React.createElement(
+	                'button',
+	                { className: 'Btn Btn--s Btn--outline Btn--circle' },
+	                React.createElement('i', { className: 'Icon Icon--twitter' })
+	              ),
+	              React.createElement(
+	                'button',
+	                { className: 'Btn Btn--s Btn--outline Btn--circle' },
+	                React.createElement('i', { className: 'Icon Icon--facebook' })
+	              ),
 	              React.createElement(TwitterButton, { sharing: true, url: window.location.href, text: 'Take 10 sec to discover how much your team and company waste in unproductive meetings! #costofunproductivemeetings' })
 	            )
 	          )
@@ -20332,7 +20350,7 @@
 	        React.createElement(
 	          'option',
 	          { value: '' },
-	          'Please choose..'
+	          'Please choose'
 	        ),
 	        this.state.sectors.map(function (sector, index) {
 	          return React.createElement(
@@ -20405,7 +20423,7 @@
 	        React.createElement(
 	          'option',
 	          { value: '' },
-	          'Please choose..'
+	          'Please choose'
 	        ),
 	        this.state.departments.map(function (department, index) {
 	          return React.createElement(

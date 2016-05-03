@@ -180,11 +180,8 @@ var CalculatorBox = React.createClass({
           </div>
 
           <div className="Grid Grid--expertise">
-            <div className="Grid-cell Grid-cell--7">
+            <div className="Grid-cell Grid-cell--9 Grid-cell--discuss">
               <p>Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.</p>
-            </div>
-
-            <div className="Grid-cell Grid-cell--2 u-tac">
             </div>
 
             <div className="Grid-cell Grid-cell--3 u-tac">
@@ -199,18 +196,33 @@ var CalculatorBox = React.createClass({
           </div>
 
           <div className="Grid Grid--footer u-vam">
-            <div className="Grid-cell Grid-cell--4 u-tal">
-              <p className="t-caption u-tal t-caption--copy">
+            <div className="Grid-cell Grid-cell--4">
+              <p className="t-caption t-caption--copy">
                 <a href="http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator" target="_blank">Wisembly 2016 Survey<br/>conducted by Censuswide</a>
               </p>
             </div>
 
-            <div className="Grid-cell Grid-cell--4 u-tac">
-              <img className="wisembly-logo" src="./assets/wisembly-logo.png" />
+            <div className="Grid-cell Grid-cell--4">
+              <a href="http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator" target="_blank">
+                <img className="wisembly-logo" src="./assets/wisembly-logo.png" />
+              </a>
             </div>
 
-            <div className="Grid-cell Grid-cell--4 u-tar">
-              <div ref="sharebuttons" className="t-caption u-tar">
+            <div className="Grid-cell Grid-cell--4">
+              <div className="t-caption t-caption--share">
+
+                <button className="Btn Btn--s Btn--outline Btn--circle">
+                  <i className="Icon Icon--linkedin"></i>
+                </button>
+
+                <button className="Btn Btn--s Btn--outline Btn--circle">
+                  <i className="Icon Icon--twitter"></i>
+                </button>
+
+                <button className="Btn Btn--s Btn--outline Btn--circle">
+                  <i className="Icon Icon--facebook"></i>
+                </button>
+
                 <TwitterButton sharing={true} url={window.location.href} text="Take 10 sec to discover how much your team and company waste in unproductive meetings! #costofunproductivemeetings" />
               </div>
             </div>
