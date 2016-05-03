@@ -88,8 +88,7 @@ var CalculatorBox = React.createClass({
       results.avgDuration * // avg meeting duraction
       results.percentUnproductive / 100 * // % improductive meetings
       48 *
-      inputs.team * // team members
-      abacus.sector[inputs.sector][3] / 100; // % white collar
+      inputs.team; // team members
 
     var company =
       results.weeklyMeetings * // weekly meeting
@@ -114,70 +113,110 @@ var CalculatorBox = React.createClass({
   render: function () {
     return (
       <div className="CalculatorBox">
-      <fieldset className="Fieldset">
-        <legend className="Legend">Meeting cost calculator</legend>
-        <div className="Grid">
-          <div className="Grid-cell Grid-cell--7">
-            <CompanySector onInputChange={this.onChangeHandle} />
-          </div>
-          <div className="Grid-cell Grid-cell--1"></div>
-          <div className="Grid-cell Grid-cell--4">
-            <CompanySize onInputChange={this.onChangeHandle} />
-          </div>
-        </div>
-        <div className="Grid Grid-row--2">
-          <div className="Grid-cell Grid-cell--7">
-            <CompanyDepartment onInputChange={this.onChangeHandle} />
-          </div>
-          <div className="Grid-cell Grid-cell--1"></div>
-          <div className="Grid-cell Grid-cell--4">
-            <TeamMembers onInputChange={this.onChangeHandle} />
-          </div>
-        </div>
+        <fieldset className="Fieldset">
 
-        <div className="Line Line--labeled Line--results">
-          <div className="Line-label">Results</div>
-        </div>
-
-        <div className="Grid">
-          <div className="Grid-cell Grid-cell--12">
-            <div className="Result">
-
-              <table className="Table">
-                <tbody className="Table-body">
-                  <tr className="Table-row">
-                    <td className="Table-cell Table-cell--important u-tal">Your team is loosing per year</td>
-                    <td className="Table-cell">{this.state.team.hours} hours</td>
-                    <td className="Table-cell">&pound;{this.state.team.money}</td>
-                  </tr>
-                  <tr className="Table-row">
-                    <td className="Table-cell Table-cell--important u-tal">Your company is loosing per year</td>
-                    <td className="Table-cell">{this.state.company.hours} hours</td>
-                    <td className="Table-cell">&pound;{this.state.company.money}</td>
-                  </tr>
-                </tbody>
-              </table>
-
+          <div className="Grid">
+            <div className="Grid-cell Grid-cell--12 Grid-cell--logo">
+              <img src="./assets/logo.png" className="Logo" />
+            </div>
+            <div className="Grid-cell Grid-cell--12 Grid-cell--header">
+              <div className="Box">
+                <div className="Box-content Box-header">How much could you spare by putting an end to unproductive meetings?</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <hr className="Line" />
-
-        <div className="Grid Grid--share f">
-          <div className="Grid-cell Grid-cell--3">
-            <div ref="sharebuttons" className="t-caption u-tal">
-              <TwitterButton sharing={this.state.sharing} url={window.location.href} text={'My team and I just lost £ ' + this.state.team.money + ' worth in unproductive meetings this year, and you?'} />
+          <div className="Grid">
+            <div className="Grid-cell Grid-cell--6">
+              <CompanySector onInputChange={this.onChangeHandle} />
+            </div>
+            <div className="Grid-cell Grid-cell--2"></div>
+            <div className="Grid-cell Grid-cell--4">
+              <CompanySize onInputChange={this.onChangeHandle} />
             </div>
           </div>
-          <div className="Grid-cell Grid-cell--9">
-            <p className="t-caption u-tar">
-              <a href="http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator" target="_blank">2016 - Censuswide survey made by  <i className="Icon Icon--wisemblyFull"></i></a>
-            </p>
+          <div className="Grid Grid-row--2">
+            <div className="Grid-cell Grid-cell--6">
+              <CompanyDepartment onInputChange={this.onChangeHandle} />
+            </div>
+            <div className="Grid-cell Grid-cell--2"></div>
+            <div className="Grid-cell Grid-cell--4">
+              <TeamMembers onInputChange={this.onChangeHandle} />
+            </div>
           </div>
-        </div>
 
-      </fieldset>
+          <div className="Grid">
+            <div className="Grid-cell Grid-cell--12 Grid-cell--line">
+              <hr className="Line" />
+            </div>
+          </div>
+
+          <div className="Grid">
+            <div className="Grid-cell Grid-cell--12">
+              <div className="Result">
+                <h4>Waste in unproductive meetings per year</h4>
+                <table className="Table">
+                  <tbody className="Table-body">
+                    <tr className="Table-row">
+                      <td className="Table-cell Table-cell--important u-tal Table-cell--title">For your team</td>
+                      <td className="Table-cell Table-cell--hours">{this.state.team.hours} hours</td>
+                      <td className="Table-cell Table-cell--money">&pound; {this.state.team.money}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <table className="Table">
+                  <tbody className="Table-body">
+                    <tr className="Table-row">
+                      <td className="Table-cell Table-cell--important u-tal Table-cell--title">For your company</td>
+                      <td className="Table-cell Table-cell--hours">{this.state.company.hours} hours</td>
+                      <td className="Table-cell Table-cell--money">&pound; {this.state.company.money}</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+
+          <div className="Grid Grid--expertise">
+            <div className="Grid-cell Grid-cell--7">
+              <p>Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.</p>
+            </div>
+
+            <div className="Grid-cell Grid-cell--2 u-tac">
+            </div>
+
+            <div className="Grid-cell Grid-cell--3 u-tac">
+              <button className="Btn Btn--s Btn--validate">Contact us</button>
+            </div>
+          </div>
+
+          <div className="Grid">
+            <div className="Grid-cell Grid-cell--12">
+              <hr className="Line" />
+            </div>
+          </div>
+
+          <div className="Grid Grid--footer u-vam">
+            <div className="Grid-cell Grid-cell--4 u-tal">
+              <p className="t-caption u-tal t-caption--copy">
+                <a href="http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator" target="_blank">Wisembly 2016 Survey<br/>conducted by Censuswide</a>
+              </p>
+            </div>
+
+            <div className="Grid-cell Grid-cell--4 u-tac">
+              <img className="wisembly-logo" src="./assets/wisembly-logo.png" />
+            </div>
+
+            <div className="Grid-cell Grid-cell--4 u-tar">
+              <div ref="sharebuttons" className="t-caption u-tar">
+                <TwitterButton sharing={true} url={window.location.href} text="Take 10 sec to discover how much your team and company waste in unproductive meetings! #costofunproductivemeetings" />
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
       </div>
     );
   }

@@ -1,15 +1,52 @@
 .CalculatorBox {
     padding: 1em;
+    margin: 0 auto;
     min-width: 320px;
+    max-width: 700px;
+}
+
+.Grid-cell--logo {
+    /*height: 105px;*/
+    text-align: center;
+}
+
+.Grid-cell--header {
+    margin-top: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.Box-header {
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.8rem !important;
+    background: #a1a9ae; /* Gray Chateau */
+}
+
+.Logo {
+    width: 220px;
+    margin: 0.5rem;
 }
 
 .Grid-row--2 {
-    margin-top: 15px;
+    margin: 0.9rem 0;
+}
+
+.Grid-cell--line {
+    padding: 0.7rem 0 0 0;
 }
 
 .Line--results {
     margin-top: 20px;
     margin-bottom: -5px;
+}
+
+.Result h4 {
+    padding: 0;
+    margin: 0.3rem 0;
+    font-weight: 500;
+    color: #f7896d; /* Salmon */
+    font-size: 1rem;
 }
 
 .Legend {
@@ -18,6 +55,64 @@
 
 .Dropdown-list {
     max-height: 15rem;
+}
+
+.Table {
+    color: #fff;
+    border: #fff;
+    margin-bottom: 0.2rem;
+}
+
+.Table-row {
+    border: #fff;
+}
+
+.Table-cell {
+    border-left: solid 1px #fff;
+    background: #f7896d; /* Salmon */
+}
+
+.Table-cell--important {
+    color: #fff;
+    font-weight: 500;
+}
+
+.Table-cell--title {
+    width: 40%;
+}
+
+.Table-cell--hours {
+    width: 30%;
+}
+
+.Table-cell--money {
+    width: 30%;
+}
+
+.Grid--expertise {
+    margin-top: 1.5rem;
+}
+
+.Grid--footer .Grid-cell {
+    height: 70px;
+    vertical-align: middle;
+}
+
+.Btn {
+    font-weight: 500;
+}
+
+.t-caption--copy {
+    margin-top: 15px;
+}
+
+.t-caption--copy a {
+    color: #a1a9ae;
+    font-weight: 500;
+}
+
+.wisembly-logo {
+    width: 175px;
 }
 
 @media only screen and (max-device-width:481px) {

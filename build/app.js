@@ -130,8 +130,7 @@
 	    var team = results.weeklyMeetings * // weekly meeting
 	    results.avgDuration * // avg meeting duraction
 	    results.percentUnproductive / 100 * // % improductive meetings
-	    48 * inputs.team * // team members
-	    abacus.sector[inputs.sector][3] / 100; // % white collar
+	    48 * inputs.team; // team members
 	
 	    var company = results.weeklyMeetings * // weekly meeting
 	    results.avgDuration * // avg meeting duraction
@@ -159,19 +158,36 @@
 	        'fieldset',
 	        { className: 'Fieldset' },
 	        React.createElement(
-	          'legend',
-	          { className: 'Legend' },
-	          'Meeting cost calculator'
+	          'div',
+	          { className: 'Grid' },
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--12 Grid-cell--logo' },
+	            React.createElement('img', { src: './assets/logo.png', className: 'Logo' })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--12 Grid-cell--header' },
+	            React.createElement(
+	              'div',
+	              { className: 'Box' },
+	              React.createElement(
+	                'div',
+	                { className: 'Box-content Box-header' },
+	                'How much could you spare by putting an end to unproductive meetings?'
+	              )
+	            )
+	          )
 	        ),
 	        React.createElement(
 	          'div',
 	          { className: 'Grid' },
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--7' },
+	            { className: 'Grid-cell Grid-cell--6' },
 	            React.createElement(CompanySector, { onInputChange: this.onChangeHandle })
 	          ),
-	          React.createElement('div', { className: 'Grid-cell Grid-cell--1' }),
+	          React.createElement('div', { className: 'Grid-cell Grid-cell--2' }),
 	          React.createElement(
 	            'div',
 	            { className: 'Grid-cell Grid-cell--4' },
@@ -183,10 +199,10 @@
 	          { className: 'Grid Grid-row--2' },
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--7' },
+	            { className: 'Grid-cell Grid-cell--6' },
 	            React.createElement(CompanyDepartment, { onInputChange: this.onChangeHandle })
 	          ),
-	          React.createElement('div', { className: 'Grid-cell Grid-cell--1' }),
+	          React.createElement('div', { className: 'Grid-cell Grid-cell--2' }),
 	          React.createElement(
 	            'div',
 	            { className: 'Grid-cell Grid-cell--4' },
@@ -195,11 +211,11 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: 'Line Line--labeled Line--results' },
+	          { className: 'Grid' },
 	          React.createElement(
 	            'div',
-	            { className: 'Line-label' },
-	            'Results'
+	            { className: 'Grid-cell Grid-cell--12 Grid-cell--line' },
+	            React.createElement('hr', { className: 'Line' })
 	          )
 	        ),
 	        React.createElement(
@@ -212,6 +228,11 @@
 	              'div',
 	              { className: 'Result' },
 	              React.createElement(
+	                'h4',
+	                null,
+	                'Waste in unproductive meetings per year'
+	              ),
+	              React.createElement(
 	                'table',
 	                { className: 'Table' },
 	                React.createElement(
@@ -222,40 +243,48 @@
 	                    { className: 'Table-row' },
 	                    React.createElement(
 	                      'td',
-	                      { className: 'Table-cell Table-cell--important u-tal' },
-	                      'Your team is loosing per year'
+	                      { className: 'Table-cell Table-cell--important u-tal Table-cell--title' },
+	                      'For your team'
 	                    ),
 	                    React.createElement(
 	                      'td',
-	                      { className: 'Table-cell' },
+	                      { className: 'Table-cell Table-cell--hours' },
 	                      this.state.team.hours,
 	                      ' hours'
 	                    ),
 	                    React.createElement(
 	                      'td',
-	                      { className: 'Table-cell' },
-	                      '£',
+	                      { className: 'Table-cell Table-cell--money' },
+	                      '£ ',
 	                      this.state.team.money
 	                    )
-	                  ),
+	                  )
+	                )
+	              ),
+	              React.createElement(
+	                'table',
+	                { className: 'Table' },
+	                React.createElement(
+	                  'tbody',
+	                  { className: 'Table-body' },
 	                  React.createElement(
 	                    'tr',
 	                    { className: 'Table-row' },
 	                    React.createElement(
 	                      'td',
-	                      { className: 'Table-cell Table-cell--important u-tal' },
-	                      'Your company is loosing per year'
+	                      { className: 'Table-cell Table-cell--important u-tal Table-cell--title' },
+	                      'For your company'
 	                    ),
 	                    React.createElement(
 	                      'td',
-	                      { className: 'Table-cell' },
+	                      { className: 'Table-cell Table-cell--hours' },
 	                      this.state.company.hours,
 	                      ' hours'
 	                    ),
 	                    React.createElement(
 	                      'td',
-	                      { className: 'Table-cell' },
-	                      '£',
+	                      { className: 'Table-cell Table-cell--money' },
+	                      '£ ',
 	                      this.state.company.money
 	                    )
 	                  )
@@ -264,31 +293,68 @@
 	            )
 	          )
 	        ),
-	        React.createElement('hr', { className: 'Line' }),
 	        React.createElement(
 	          'div',
-	          { className: 'Grid Grid--share f' },
+	          { className: 'Grid Grid--expertise' },
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--3' },
+	            { className: 'Grid-cell Grid-cell--7' },
 	            React.createElement(
-	              'div',
-	              { ref: 'sharebuttons', className: 't-caption u-tal' },
-	              React.createElement(TwitterButton, { sharing: this.state.sharing, url: window.location.href, text: 'My team and I just lost £ ' + this.state.team.money + ' worth in unproductive meetings this year, and you?' })
+	              'p',
+	              null,
+	              'Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.'
+	            )
+	          ),
+	          React.createElement('div', { className: 'Grid-cell Grid-cell--2 u-tac' }),
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--3 u-tac' },
+	            React.createElement(
+	              'button',
+	              { className: 'Btn Btn--s Btn--validate' },
+	              'Contact us'
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'Grid' },
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--12' },
+	            React.createElement('hr', { className: 'Line' })
+	          )
+	        ),
+	        React.createElement(
+	          'div',
+	          { className: 'Grid Grid--footer u-vam' },
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--4 u-tal' },
+	            React.createElement(
+	              'p',
+	              { className: 't-caption u-tal t-caption--copy' },
+	              React.createElement(
+	                'a',
+	                { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
+	                'Wisembly 2016 Survey',
+	                React.createElement('br', null),
+	                'conducted by Censuswide'
+	              )
 	            )
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--9' },
+	            { className: 'Grid-cell Grid-cell--4 u-tac' },
+	            React.createElement('img', { className: 'wisembly-logo', src: './assets/wisembly-logo.png' })
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'Grid-cell Grid-cell--4 u-tar' },
 	            React.createElement(
-	              'p',
-	              { className: 't-caption u-tar' },
-	              React.createElement(
-	                'a',
-	                { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
-	                '2016 - Censuswide survey made by  ',
-	                React.createElement('i', { className: 'Icon Icon--wisemblyFull' })
-	              )
+	              'div',
+	              { ref: 'sharebuttons', className: 't-caption u-tar' },
+	              React.createElement(TwitterButton, { sharing: true, url: window.location.href, text: 'Take 10 sec to discover how much your team and company waste in unproductive meetings! #costofunproductivemeetings' })
 	            )
 	          )
 	        )
@@ -20372,7 +20438,7 @@
 	        { 'for': 'TeamMembers', className: 'Label Label--block' },
 	        'Team members'
 	      ),
-	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
+	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'People running meetings, including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
 	    );
 	  }
 	});
