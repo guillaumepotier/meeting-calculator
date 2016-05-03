@@ -68,21 +68,18 @@
     background: #f7896d; /* Salmon */
 }
 
-.Table-cell--important {
+.Grid--results .Grid-cell {
     color: #fff;
     font-weight: 500;
+    padding: 1rem;
+    text-align: center;
+    border-left: solid 1px #fff;
+    margin-bottom: 0.2rem;
+    background: #f7896d; /* Salmon */
 }
 
-.Table-cell--title {
-    width: 40%;
-}
-
-.Table-cell--hours {
-    width: 30%;
-}
-
-.Table-cell--money {
-    width: 30%;
+.Grid-cell--title {
+    text-align: left !important;
 }
 
 .Grid--expertise {
@@ -121,6 +118,17 @@
     }
     .Grid-cell {
         width: 100% !important;
+    }
+    .Grid--results .Grid-cell {
+        border: none;
+        margin-bottom: 1px;
+    }
+    .Grid-cell--hours, .Grid-cell--money {
+        width: 50% !important;
+    }
+    .Grid-cell--title {
+        margin-top: 0.2rem;
+        margin-bottom: 1px;
     }
     .Grid--share .Grid-cell {
         width: 50% !important;

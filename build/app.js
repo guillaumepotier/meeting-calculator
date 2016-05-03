@@ -233,61 +233,45 @@
 	                'Waste in unproductive meetings per year'
 	              ),
 	              React.createElement(
-	                'table',
-	                { className: 'Table' },
+	                'div',
+	                { className: 'Grid Grid--results' },
 	                React.createElement(
-	                  'tbody',
-	                  { className: 'Table-body' },
-	                  React.createElement(
-	                    'tr',
-	                    { className: 'Table-row' },
-	                    React.createElement(
-	                      'td',
-	                      { className: 'Table-cell Table-cell--important u-tal Table-cell--title' },
-	                      'For your team'
-	                    ),
-	                    React.createElement(
-	                      'td',
-	                      { className: 'Table-cell Table-cell--hours' },
-	                      this.state.team.hours,
-	                      ' hours'
-	                    ),
-	                    React.createElement(
-	                      'td',
-	                      { className: 'Table-cell Table-cell--money' },
-	                      '£ ',
-	                      this.state.team.money
-	                    )
-	                  )
+	                  'div',
+	                  { className: 'Grid-cell Grid-cell--6 Grid-cell--title' },
+	                  'For your team'
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'Grid-cell Grid-cell--3 Grid-cell--hours' },
+	                  this.state.team.hours,
+	                  ' hours'
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'Grid-cell Grid-cell--3 Grid-cell--money' },
+	                  '£ ',
+	                  this.state.team.money
 	                )
 	              ),
 	              React.createElement(
-	                'table',
-	                { className: 'Table' },
+	                'div',
+	                { className: 'Grid Grid--results' },
 	                React.createElement(
-	                  'tbody',
-	                  { className: 'Table-body' },
-	                  React.createElement(
-	                    'tr',
-	                    { className: 'Table-row' },
-	                    React.createElement(
-	                      'td',
-	                      { className: 'Table-cell Table-cell--important u-tal Table-cell--title' },
-	                      'For your company'
-	                    ),
-	                    React.createElement(
-	                      'td',
-	                      { className: 'Table-cell Table-cell--hours' },
-	                      this.state.company.hours,
-	                      ' hours'
-	                    ),
-	                    React.createElement(
-	                      'td',
-	                      { className: 'Table-cell Table-cell--money' },
-	                      '£ ',
-	                      this.state.company.money
-	                    )
-	                  )
+	                  'div',
+	                  { className: 'Grid-cell Grid-cell--6 Grid-cell--title' },
+	                  'For your company'
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'Grid-cell Grid-cell--3 Grid-cell--hours' },
+	                  this.state.company.hours,
+	                  ' hours'
+	                ),
+	                React.createElement(
+	                  'div',
+	                  { className: 'Grid-cell Grid-cell--3 Grid-cell--money' },
+	                  '£ ',
+	                  this.state.company.money
 	                )
 	              )
 	            )

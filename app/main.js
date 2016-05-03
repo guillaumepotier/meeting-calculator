@@ -155,25 +155,18 @@ var CalculatorBox = React.createClass({
             <div className="Grid-cell Grid-cell--12">
               <div className="Result">
                 <h4>Waste in unproductive meetings per year</h4>
-                <table className="Table">
-                  <tbody className="Table-body">
-                    <tr className="Table-row">
-                      <td className="Table-cell Table-cell--important u-tal Table-cell--title">For your team</td>
-                      <td className="Table-cell Table-cell--hours">{this.state.team.hours} hours</td>
-                      <td className="Table-cell Table-cell--money">&pound; {this.state.team.money}</td>
-                    </tr>
-                  </tbody>
-                </table>
 
-                <table className="Table">
-                  <tbody className="Table-body">
-                    <tr className="Table-row">
-                      <td className="Table-cell Table-cell--important u-tal Table-cell--title">For your company</td>
-                      <td className="Table-cell Table-cell--hours">{this.state.company.hours} hours</td>
-                      <td className="Table-cell Table-cell--money">&pound; {this.state.company.money}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div className="Grid Grid--results">
+                  <div className="Grid-cell Grid-cell--6 Grid-cell--title">For your team</div>
+                  <div className="Grid-cell Grid-cell--3 Grid-cell--hours">{this.state.team.hours} hours</div>
+                  <div className="Grid-cell Grid-cell--3 Grid-cell--money">&pound; {this.state.team.money}</div>
+                </div>
+
+                <div className="Grid Grid--results">
+                  <div className="Grid-cell Grid-cell--6 Grid-cell--title">For your company</div>
+                  <div className="Grid-cell Grid-cell--3 Grid-cell--hours">{this.state.company.hours} hours</div>
+                  <div className="Grid-cell Grid-cell--3 Grid-cell--money">&pound; {this.state.company.money}</div>
+                </div>
 
               </div>
             </div>
