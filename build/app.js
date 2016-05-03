@@ -167,7 +167,7 @@
 	          window.open('https://twitter.com/intent/tweet?original_referer=' + encodeURIComponent(shareLink) + '&text=' + encodeURIComponent(shareTitle) + '%20' + encodeURIComponent(shareLink), 'Twitter', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
 	          break;
 	        case 'facebook':
-	          window.open('//www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=' + encodeURIComponent(shareLink) + '&quote=' + encodeURIComponent(shareTitle) + '&p[summary]=' + encodeURIComponent(shareDescription), 'Facebook', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+	          window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareLink) + '&display=popup&ref=plugin&src=like&app_id=113869198637480&quote=' + encodeURIComponent(shareTitle), 'Facebook', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
 	          break;
 	      }
 	    });
