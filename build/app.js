@@ -98,7 +98,6 @@
 	      }
 	    };
 	  },
-	  componentDidMount: function componentDidMount() {},
 	  onChangeHandle: function onChangeHandle(change) {
 	    var inputs = Object.assign({}, this.state.inputs);
 	    inputs[change.type] = change.value;
@@ -153,6 +152,25 @@
 	    $('html, body').animate({
 	      scrollTop: $("#js-results").offset().top
 	    }, 2000);
+	  },
+	  componentDidMount: function componentDidMount() {
+	    $(".share").on('click', function () {
+	      var shareLink = window.location.href,
+	          shareTitle = 'Take 10 sec to discover how much your team and company waste in unproductive meetings!',
+	          shareDescription = shareTitle;
+	
+	      switch ($(this).data('value')) {
+	        case 'linkedin':
+	          window.open('//www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(shareLink) + '&title=' + encodeURIComponent(shareTitle + ' - ' + shareLink) + '&source=' + encodeURIComponent(shareLink), 'LinkedIn', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+	          break;
+	        case 'twitter':
+	          window.open('https://twitter.com/intent/tweet?original_referer=' + encodeURIComponent(shareLink) + '&text=' + encodeURIComponent(shareTitle) + '%20' + encodeURIComponent(shareLink), 'Twitter', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+	          break;
+	        case 'facebook':
+	          window.open('//www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=' + encodeURIComponent(shareLink) + '&quote=' + encodeURIComponent(shareTitle) + '&p[summary]=' + encodeURIComponent(shareDescription), 'Facebook', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+	          break;
+	      }
+	    });
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -347,20 +365,19 @@
 	              { className: 't-caption t-caption--share' },
 	              React.createElement(
 	                'button',
-	                { className: 'Btn Btn--s Btn--outline Btn--circle' },
+	                { className: 'Btn Btn--s Btn--outline Btn--circle share', 'data-value': 'linkedin' },
 	                React.createElement('i', { className: 'Icon Icon--linkedin' })
 	              ),
 	              React.createElement(
 	                'button',
-	                { className: 'Btn Btn--s Btn--outline Btn--circle' },
+	                { className: 'Btn Btn--s Btn--outline Btn--circle share', 'data-value': 'twitter' },
 	                React.createElement('i', { className: 'Icon Icon--twitter' })
 	              ),
 	              React.createElement(
 	                'button',
-	                { className: 'Btn Btn--s Btn--outline Btn--circle' },
+	                { className: 'Btn Btn--s Btn--outline Btn--circle share', 'data-value': 'facebook' },
 	                React.createElement('i', { className: 'Icon Icon--facebook' })
-	              ),
-	              React.createElement(TwitterButton, { sharing: true, url: window.location.href, text: 'Take 10 sec to discover how much your team and company waste in unproductive meetings! #costofunproductivemeetings' })
+	              )
 	            )
 	          )
 	        )
@@ -20448,7 +20465,7 @@
 	        { 'for': 'TeamMembers', className: 'Label Label--block' },
 	        'Team members (including you)'
 	      ),
-	      React.createElement('input', { ref: 'input', type: 'text', pattern: '[0-9]*', onChange: this.onChange, placeholder: 'Running meetings', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
+	      React.createElement('input', { ref: 'input', type: 'text', pattern: '[0-9]*', onChange: this.onChange, placeholder: 'Attending meetings', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
 	    );
 	  }
 	});

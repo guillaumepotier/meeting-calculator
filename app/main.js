@@ -50,8 +50,6 @@ var CalculatorBox = React.createClass({
       }
     };
   },
-  componentDidMount: function () {
-  },
   onChangeHandle: function (change) {
     var inputs = Object.assign({}, this.state.inputs);
     inputs[change.type] = change.value;
@@ -113,6 +111,25 @@ var CalculatorBox = React.createClass({
     $('html, body').animate({
       scrollTop: $("#js-results").offset().top
     }, 2000);
+  },
+  componentDidMount: function () {
+    $(".share").on('click', function () {
+      var shareLink = window.location.href,
+        shareTitle = 'Take 10 sec to discover how much your team and company waste in unproductive meetings!',
+        shareDescription = shareTitle;
+
+      switch ($(this).data('value')) {
+        case 'linkedin':
+          window.open('//www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(shareLink) + '&title=' + encodeURIComponent(shareTitle + ' - ' + shareLink) + '&source=' + encodeURIComponent(shareLink),'LinkedIn','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+          break;
+        case 'twitter':
+          window.open('https://twitter.com/intent/tweet?original_referer=' + encodeURIComponent(shareLink) + '&text=' + encodeURIComponent(shareTitle) + '%20' + encodeURIComponent(shareLink),'Twitter','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+          break;
+        case 'facebook':
+          window.open('//www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=' + encodeURIComponent(shareLink) + '&quote=' + encodeURIComponent(shareTitle) + '&p[summary]=' + encodeURIComponent(shareDescription),'Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+          break;
+      }
+    });
   },
   render: function () {
     return (
@@ -208,19 +225,18 @@ var CalculatorBox = React.createClass({
             <div className="Grid-cell Grid-cell--4">
               <div className="t-caption t-caption--share">
 
-                <button className="Btn Btn--s Btn--outline Btn--circle">
+                <button className="Btn Btn--s Btn--outline Btn--circle share" data-value="linkedin">
                   <i className="Icon Icon--linkedin"></i>
                 </button>
 
-                <button className="Btn Btn--s Btn--outline Btn--circle">
+                <button className="Btn Btn--s Btn--outline Btn--circle share" data-value="twitter">
                   <i className="Icon Icon--twitter"></i>
                 </button>
 
-                <button className="Btn Btn--s Btn--outline Btn--circle">
+                <button className="Btn Btn--s Btn--outline Btn--circle share" data-value="facebook">
                   <i className="Icon Icon--facebook"></i>
                 </button>
 
-                <TwitterButton sharing={true} url={window.location.href} text="Take 10 sec to discover how much your team and company waste in unproductive meetings! #costofunproductivemeetings" />
               </div>
             </div>
           </div>
