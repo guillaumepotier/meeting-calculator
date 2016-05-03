@@ -109,6 +109,10 @@ var CalculatorBox = React.createClass({
         money: (Math.round(company * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3, ',', '.')
       }
     });
+
+    $('html, body').animate({
+      scrollTop: $("#js-results").offset().top
+    }, 2000);
   },
   render: function () {
     return (
@@ -153,7 +157,7 @@ var CalculatorBox = React.createClass({
 
           <div className="Grid">
             <div className="Grid-cell Grid-cell--12">
-              <div className="Result">
+              <div className="Result" id="js-results">
                 <h4>Waste in unproductive meetings per year</h4>
 
                 <div className="Grid Grid--results">

@@ -149,6 +149,10 @@
 	        money: (Math.round(company * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3, ',', '.')
 	      }
 	    });
+	
+	    $('html, body').animate({
+	      scrollTop: $("#js-results").offset().top
+	    }, 2000);
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -226,7 +230,7 @@
 	            { className: 'Grid-cell Grid-cell--12' },
 	            React.createElement(
 	              'div',
-	              { className: 'Result' },
+	              { className: 'Result', id: 'js-results' },
 	              React.createElement(
 	                'h4',
 	                null,

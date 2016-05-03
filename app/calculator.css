@@ -120,10 +120,13 @@
     width: 175px;
 }
 
-@media only screen and (max-device-width:481px) {
+@media only screen and (max-width:481px) {
     .Legend {
         font-size: 1.7rem;
         padding-bottom: 0.5rem;
+    }
+    .Line {
+        margin: 1rem 0;
     }
     .Fieldset {
         margin: 0.5rem;
@@ -179,6 +182,10 @@
     }
     .Grid--footer .Grid-cell {
         height: 3.5rem;
+        text-align: center;
+    }
+    .t-caption--share {
+        margin-top: 1.5rem;
         text-align: center;
     }
 }
