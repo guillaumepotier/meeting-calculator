@@ -195,7 +195,7 @@ var CalculatorBox = React.createClass({
               </p>
             </div>
 
-            <div className="Grid-cell Grid-cell--4">
+            <div className="Grid-cell Grid-cell--4 Grid-cell--wisemblylogo">
               <a href="http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator" target="_blank">
                 <img className="wisembly-logo" src="./assets/wisembly-logo.png" />
               </a>

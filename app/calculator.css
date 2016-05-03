@@ -15,6 +15,10 @@
     margin-bottom: 1.5rem;
 }
 
+.Line {
+    margin: 0.4rem 0;
+}
+
 .Box-header {
     color: #fff;
     font-weight: 500;
@@ -99,9 +103,17 @@
     margin-top: 15px;
 }
 
+.t-caption--share {
+    text-align: right;
+}
+
 .t-caption--copy a {
     color: #a1a9ae;
     font-weight: 500;
+}
+
+.Grid-cell--wisemblylogo {
+    text-align: center;
 }
 
 .wisembly-logo {

@@ -328,7 +328,7 @@
 	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'Grid-cell Grid-cell--4' },
+	            { className: 'Grid-cell Grid-cell--4 Grid-cell--wisemblylogo' },
 	            React.createElement(
 	              'a',
 	              { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
@@ -20357,6 +20357,8 @@
 	    };
 	  },
 	  onChange: function onChange(e) {
+	    if (isNaN(parseFloat(this.refs.input.value)) || !isFinite(this.refs.input.value)) return $("#CompanySize").val('');
+	
 	    this.setState({ size: this.refs.input.value });
 	    this.props.onInputChange({ type: 'size', value: this.refs.input.value });
 	  },
@@ -20369,7 +20371,7 @@
 	        { 'for': 'CompanySize', className: 'Label Label--block' },
 	        'Company size'
 	      ),
-	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'Number of employees', name: 'CompanySize', id: 'CompanySize', className: 'Input' })
+	      React.createElement('input', { ref: 'input', type: 'text', pattern: '[0-9]*', onChange: this.onChange, placeholder: 'Number of employees', name: 'CompanySize', id: 'CompanySize', className: 'Input' })
 	    );
 	  }
 	});
@@ -20428,6 +20430,8 @@
 	    return { members: '' };
 	  },
 	  onChange: function onChange(e) {
+	    if (isNaN(parseFloat(this.refs.input.value)) || !isFinite(this.refs.input.value)) return $("#TeamMembers").val('');
+	
 	    this.setState({ team: this.refs.input.value });
 	    this.props.onInputChange({ type: 'team', value: this.refs.input.value });
 	  },
@@ -20440,7 +20444,7 @@
 	        { 'for': 'TeamMembers', className: 'Label Label--block' },
 	        'Team members'
 	      ),
-	      React.createElement('input', { ref: 'input', type: 'number', onChange: this.onChange, placeholder: 'People running meetings, including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
+	      React.createElement('input', { ref: 'input', type: 'text', pattern: '[0-9]*', onChange: this.onChange, placeholder: 'People running meetings, including you', name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
 	    );
 	  }
 	});
