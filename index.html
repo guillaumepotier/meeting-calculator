@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<!--[if IE 9]><html class="no-flexbox"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
   <head>
     <meta charset="utf-8" />
     <title>Meeting cost calculator</title>
@@ -12,6 +13,25 @@
     <script src="./bower_components/tapestry/dist/js/tapestry.js"></script>
 
     <meta name="viewport" content="width=device-width, user-scalable=no">
+    <style>
+    .no-flexbox .Grid {
+      width: 100%;
+      font-size: 0;
+    }
+
+    .no-flexbox .Grid-cell {
+      display: inline-block;
+      position: relative;
+      min-height: 1px;
+      font-size: 1rem;
+      word-wrap: break-word;
+      vertical-align: top;
+    }
+
+    .no-flexbox .Grid-cell--centered {
+      display: block;
+    }
+    </style>
   </head>
   <body>
     <div id="content"></div>
