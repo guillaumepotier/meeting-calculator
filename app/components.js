@@ -1,11 +1,6 @@
 var React = require('react');
 
 var CompanySector = React.createClass({
-  getInitialState: function () {
-    return {
-        sectors: ['Publishers', 'Aeronautics/Defense', 'B2B Technology', 'Banking and Insurance', 'Consumer Technology', 'Professional Services', 'Energy', 'Finance', 'Travel and Leisure', 'Industrial', 'Food and Beverages', 'Retail / eCommerce', 'Construction', 'Transportation', 'Pharma and Biotech']
-    };
-  },
   // fucking jQuery hack to support Tapestry select..
   componentDidMount: function () {
     $('#CompanySector').on('change', function (e) {
@@ -19,10 +14,10 @@ var CompanySector = React.createClass({
   render: function () {
     return (
       <div className="CompanySector">
-        <label for="CompanySector" className="Label Label--block">Company sector</label>
+        <label for="CompanySector" className="Label Label--block">{__('Company sector')}</label>
         <select ref="select" type="select" onChange={this.onChange} name="CompanySector" id="CompanySector" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
-          <option value="">Please choose</option>
-          {this.state.sectors.map(function (sector, index) {
+          <option value="">{__('Please choose')}</option>
+          {abacus.sectors.map(function (sector, index) {
             return <option key={index} value={index}>{sector}</option>;
           })}
         </select>
@@ -47,19 +42,14 @@ var CompanySize = React.createClass({
   render: function () {
     return (
       <div className="CompanySize">
-        <label for="CompanySize" className="Label Label--block">Company size</label>
-        <input ref="input" type="text" pattern="[0-9]*" onChange={this.onChange} placeholder="Number of employees" name="CompanySize" id="CompanySize" className="Input" />
+        <label for="CompanySize" className="Label Label--block">{__('Company size')}</label>
+        <input ref="input" type="text" pattern="[0-9]*" onChange={this.onChange} placeholder={__('Number of employees')} name="CompanySize" id="CompanySize" className="Input" />
       </div>
     );
   }
 });
 
 var CompanyDepartment = React.createClass({
-  getInitialState: function () {
-    return {
-      departments: ['HR', 'Marketing', 'Events and communications', 'Legal', 'Sales', 'Technology, Digital and innovation', 'IT', 'Finance', 'Operational service']
-    };
-  },
   // fucking jQuery hack to support Tapestry select..
   componentDidMount: function () {
     $('#CompanyDepartment').on('change', function (e) {
@@ -75,8 +65,8 @@ var CompanyDepartment = React.createClass({
       <div className="CompanyDepartment">
         <label for="CompanyDepartment" className="Label Label--block">Company department</label>
         <select ref="select" type="select" onChange={this.onChange} name="CompanyDepartment" id="CompanyDepartment" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
-          <option value="">Please choose</option>
-          {this.state.departments.map(function (department, index) {
+          <option value="">{__('Please choose')}</option>
+          {abacus.departments.map(function (department, index) {
             return <option key={index} value={index}>{department}</option>;
           })}
         </select>
@@ -99,8 +89,8 @@ var TeamMembers = React.createClass({
   render: function () {
     return (
       <div className="TeamMembers">
-        <label for="TeamMembers" className="Label Label--block">Team members (including you)</label>
-        <input ref="input" type="text" pattern="[0-9]*" onChange={this.onChange} placeholder="Attending meetings" name="TeamMembers" id="TeamMembers" className="Input" />
+        <label for="TeamMembers" className="Label Label--block">{__('Team members (including you)')}</label>
+        <input ref="input" type="text" pattern="[0-9]*" onChange={this.onChange} placeholder={__('Attending meetings')} name="TeamMembers" id="TeamMembers" className="Input" />
       </div>
     );
   }
