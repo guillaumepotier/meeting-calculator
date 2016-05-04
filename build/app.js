@@ -328,7 +328,7 @@
 	            React.createElement(
 	              'a',
 	              { href: __("mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers"), className: 'Btn Btn--s Btn--validate' },
-	              'Contact us'
+	              __('Contact us')
 	            )
 	          )
 	        ),
@@ -20554,7 +20554,8 @@
 	    'Attending meetings': 'Participant à des réunions',
 	    'Wisembly 2016 Survey': 'Étude Wisembly 2016',
 	    'conducted by Censuswide': 'réalisée par l\'IFOP',
-	    'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop'
+	    'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop',
+	    'Contact us': 'Contactez nous'
 	  }
 	};
 

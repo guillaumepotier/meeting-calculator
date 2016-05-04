@@ -217,7 +217,7 @@ var CalculatorBox = React.createClass({
             </div>
 
             <div className="Grid-cell Grid-cell--3 u-tac">
-              <a href={__("mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers")} className="Btn Btn--s Btn--validate">Contact us</a>
+              <a href={__("mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers")} className="Btn Btn--s Btn--validate">{__('Contact us')}</a>
             </div>
           </div>
 

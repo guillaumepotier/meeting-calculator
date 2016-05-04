@@ -17,6 +17,7 @@ module.exports = {
     'Attending meetings': 'Participant à des réunions',
     'Wisembly 2016 Survey': 'Étude Wisembly 2016',
     'conducted by Censuswide': 'réalisée par l\'IFOP',
-    'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop'
+    'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop',
+    'Contact us': 'Contactez nous'
   }
 }
