@@ -14,7 +14,7 @@ var CompanySector = React.createClass({
   render: function () {
     return (
       <div className="CompanySector">
-        <label for="CompanySector" className="Label Label--block">{__('Company sector')}</label>
+        <label for="CompanySector" className="Label Label--block">{__('Company industry')}</label>
         <select ref="select" type="select" onChange={this.onChange} name="CompanySector" id="CompanySector" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
           <option value="">{__('Please choose')}</option>
           {abacus.sectors.map(function (sector, index) {
@@ -63,7 +63,7 @@ var CompanyDepartment = React.createClass({
   render: function () {
     return (
       <div className="CompanyDepartment">
-        <label for="CompanyDepartment" className="Label Label--block">Company department</label>
+        <label for="CompanyDepartment" className="Label Label--block">{__('Your department')}</label>
         <select ref="select" type="select" onChange={this.onChange} name="CompanyDepartment" id="CompanyDepartment" className="Dropdown Dropdown--block" data-tapestry="dropdown-select">
           <option value="">{__('Please choose')}</option>
           {abacus.departments.map(function (department, index) {
@@ -89,7 +89,7 @@ var TeamMembers = React.createClass({
   render: function () {
     return (
       <div className="TeamMembers">
-        <label for="TeamMembers" className="Label Label--block">{__('Team members (including you)')}</label>
+        <label for="TeamMembers" className="Label Label--block">{__('Number of team members (including you)')}</label>
         <input ref="input" type="text" pattern="[0-9]*" onChange={this.onChange} placeholder={__('Attending meetings')} name="TeamMembers" id="TeamMembers" className="Input" />
       </div>
     );

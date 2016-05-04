@@ -364,7 +364,7 @@
 	            { className: 'Grid-cell Grid-cell--4 Grid-cell--wisemblylogo' },
 	            React.createElement(
 	              'a',
-	              { href: 'http://wisembly.com/en/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
+	              { href: 'http://wisembly.com/' + window.lang + '/?utm=meetingcalculator&utc=meetingcalculator', target: '_blank' },
 	              React.createElement('img', { className: 'wisembly-logo', src: './assets/wisembly-logo.png' })
 	            )
 	          ),
@@ -20306,7 +20306,7 @@
 	    [3.0, 1.60, 43.0, 40.0, 23.34], // Administration publique
 	    [2.5, 1.39, 38.8, 40.0, 24.15] // Enseignement, santé humaine et action sociale
 	    ],
-	    sectors: ['Industrie agroalimentaire', 'Industrie lourde automobile, aéronautique, chimie...', 'Industries des biens de consommation ou d\'équipement', 'Energie, environnement', 'Batiment, travaux publics', 'Transports, logistique', 'Commerce, de gros/de détail', 'Grande distribution', 'Hôtellerie, restauration, tourisme, loisirs', 'Industrial', 'Banque, assurance, services financiers', 'Information et communication', 'Immobilier', 'Informatique, Internet, multimédia, télecoms', 'Services aux entreprises', 'Services aux particuliers', 'Administration publique', 'Enseignement, santé humaine et action sociale'],
+	    sectors: ['Industrie agroalimentaire', 'Industrie lourde', 'Industries des biens de consommation', 'Energie, environnement', 'Batiment, travaux publics', 'Transports, logistique', 'Commerce, de gros/de détail', 'Grande distribution', 'Hôtellerie, restauration, tourisme, loisirs', 'Industrial', 'Banque, assurance, services financiers', 'Information et communication', 'Immobilier', 'Informatique, Internet, multimédia, télecoms', 'Services aux entreprises', 'Services aux particuliers', 'Administration publique', 'Enseignement, santé humaine et action sociale'],
 	    // meetings/week, avg meeting duration, %unproductive
 	    size: [[1.4, 1.12, 38.5], // 1 - 9 employees
 	    [1.8, 0.98, 35.3], // 10 - 19 employees
@@ -20404,7 +20404,7 @@
 	      React.createElement(
 	        'label',
 	        { 'for': 'CompanySector', className: 'Label Label--block' },
-	        __('Company sector')
+	        __('Company industry')
 	      ),
 	      React.createElement(
 	        'select',
@@ -20474,7 +20474,7 @@
 	      React.createElement(
 	        'label',
 	        { 'for': 'CompanyDepartment', className: 'Label Label--block' },
-	        'Company department'
+	        __('Your department')
 	      ),
 	      React.createElement(
 	        'select',
@@ -20515,7 +20515,7 @@
 	      React.createElement(
 	        'label',
 	        { 'for': 'TeamMembers', className: 'Label Label--block' },
-	        __('Team members (including you)')
+	        __('Number of team members (including you)')
 	      ),
 	      React.createElement('input', { ref: 'input', type: 'text', pattern: '[0-9]*', onChange: this.onChange, placeholder: __('Attending meetings'), name: 'TeamMembers', id: 'TeamMembers', className: 'Input' })
 	    );
@@ -20546,11 +20546,12 @@
 	    'Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.': 'Envie d\'échanger ? Chez Wisembly nous avons l\'expertise nécessaire pour vous aider à construire des réunions engageantes et productives à tous les coups.',
 	    "mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers": 'Object: Construisons des réunions plus productives%0D%0ACorps: Je souhaiterais être contacté par un expert de l\'équipe Wisembly%0D%0AMon numéro de téléphone:%0D%0ACordialement',
 	    'Take 10 sec to discover how much your team and company waste in unproductive meetings!': 'Découvrez en 10s combien votre équipe et votre entreprises gâchent en réunions improductives',
-	    'Company sector': 'Secteur de l’entreprise',
+	    'Company industry': 'Secteur de votre entreprise',
+	    'Your department': 'Votre département',
 	    'Please choose': 'Faites une sélection',
-	    'Company size': 'Taille de l’entreprise',
+	    'Company size': 'Taille de votre entreprise',
 	    'Number of employees': 'Nombre d’employés',
-	    'Team members (including you)': 'Nombre de coéquipiers (vous y compris)',
+	    'Number of team members (including you)': 'Taille de votre équipe (vous compris)',
 	    'Attending meetings': 'Participant à des réunions',
 	    'Wisembly 2016 Survey': 'Étude Wisembly 2016',
 	    'conducted by Censuswide': 'réalisée par l\'IFOP',
