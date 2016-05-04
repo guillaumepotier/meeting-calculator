@@ -190,6 +190,8 @@
 	          break;
 	      }
 	    });
+	
+	    $("head").append('<meta property="og:title" content="' + __('Meetings cost calculator') + '" />' + '<meta property="og:description" content="' + __('Estimate how much your company could spare by putting an end to unproductive meetings with this calculator.') + '" />' + '<meta property="og:image" content="./assets/logo.png" />');
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -20537,6 +20539,8 @@
 	
 	module.exports = {
 	  fr: {
+	    'Meetings cost calculator': 'Meetings cost calculator',
+	    'Estimate how much your company could spare by putting an end to unproductive meetings with this calculator.': 'Découvrez combien vous pourriez économiser en mettant fin aux réunions improductives avec ce calculateur.',
 	    '&pound; %f': '%f &euro;',
 	    'How much could you spare by putting an end to unproductive meetings?': 'Combien pourriez-vous économiser en mettant fin aux réunions improductives de vos cadres ?',
 	    'Waste in unproductive meetings per year': 'Perte annuelle en réunions improductives ',

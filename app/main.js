@@ -148,6 +148,10 @@ var CalculatorBox = React.createClass({
           break;
       }
     });
+
+    $("head").append('<meta property="og:title" content="' + __('Meetings cost calculator') + '" />' +
+      '<meta property="og:description" content="' + __('Estimate how much your company could spare by putting an end to unproductive meetings with this calculator.') + '" />' +
+      '<meta property="og:image" content="./assets/logo.png" />');
   },
   render: function () {
     return (
