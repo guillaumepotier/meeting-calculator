@@ -288,12 +288,7 @@
 	                  ' ',
 	                  __('hours')
 	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'Grid-cell Grid-cell--3 Grid-cell--money' },
-	                  '£ ',
-	                  this.state.team.money
-	                )
+	                React.createElement('div', { className: 'Grid-cell Grid-cell--3 Grid-cell--money', dangerouslySetInnerHTML: { __html: __('&pound; %f').replace('%f', this.state.team.money) } })
 	              ),
 	              React.createElement(
 	                'div',
@@ -310,12 +305,7 @@
 	                  ' ',
 	                  __('hours')
 	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'Grid-cell Grid-cell--3 Grid-cell--money' },
-	                  '£ ',
-	                  this.state.company.money
-	                )
+	                React.createElement('div', { className: 'Grid-cell Grid-cell--3 Grid-cell--money', dangerouslySetInnerHTML: { __html: __('&pound; %f').replace('%f', this.state.company.money) } })
 	              )
 	            )
 	          )
@@ -20547,10 +20537,11 @@
 	
 	module.exports = {
 	  fr: {
+	    '&pound; %f': '%f &euro;',
 	    'How much could you spare by putting an end to unproductive meetings?': 'Combien pourriez-vous économiser en mettant fin aux réunions improductives de vos cadres ?',
 	    'Waste in unproductive meetings per year': 'Perte annuelle en réunions improductives ',
 	    'For your team': 'Pour votre équipe',
-	    'hours': 'Heures',
+	    'hours': 'heures',
 	    'For your company': 'Pour votre entreprise',
 	    'Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.': 'Envie d\'échanger ? Chez Wisembly nous avons l\'expertise nécessaire pour vous aider à construire des réunions engageantes et productives à tous les coups.',
 	    "mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers": 'Object: Construisons des réunions plus productives%0D%0ACorps: Je souhaiterais être contacté par un expert de l\'équipe Wisembly%0D%0AMon numéro de téléphone:%0D%0ACordialement',

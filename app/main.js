@@ -198,13 +198,13 @@ var CalculatorBox = React.createClass({
                 <div className="Grid Grid--results">
                   <div className="Grid-cell Grid-cell--6 Grid-cell--title">{__('For your team')}</div>
                   <div className="Grid-cell Grid-cell--3 Grid-cell--hours">{this.state.team.hours} {__('hours')}</div>
-                  <div className="Grid-cell Grid-cell--3 Grid-cell--money">&pound; {this.state.team.money}</div>
+                  <div className="Grid-cell Grid-cell--3 Grid-cell--money" dangerouslySetInnerHTML={{ __html: __('&pound; %f').replace('%f', this.state.team.money) }}></div>
                 </div>
 
                 <div className="Grid Grid--results">
                   <div className="Grid-cell Grid-cell--6 Grid-cell--title">{__('For your company')}</div>
                   <div className="Grid-cell Grid-cell--3 Grid-cell--hours">{this.state.company.hours} {__('hours')}</div>
-                  <div className="Grid-cell Grid-cell--3 Grid-cell--money">&pound; {this.state.company.money}</div>
+                  <div className="Grid-cell Grid-cell--3 Grid-cell--money" dangerouslySetInnerHTML={{ __html: __('&pound; %f').replace('%f', this.state.company.money) }}></div>
                 </div>
 
               </div>
