@@ -255,7 +255,7 @@ var CalculatorBox = React.createClass({
             <div className="Grid-cell Grid-cell--4">
               <p className="t-caption t-caption--copy">
                 <a href={__('http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator')} target="_blank">{__('Wisembly 2016 UK Survey')}<br/>{__('conducted by Censuswide')}</a><br/>
-                <a className="js-switch-locale" href="">{lang === 'en' ? 'See French study' : 'Voir l\'étude UK'}</a>
+                {/* <a className="js-switch-locale" href="">{lang === 'en' ? 'See French study' : 'Voir l\'étude UK'}</a> */}
               </p>
             </div>
 

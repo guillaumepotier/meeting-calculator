@@ -375,12 +375,7 @@
 	                React.createElement('br', null),
 	                __('conducted by Censuswide')
 	              ),
-	              React.createElement('br', null),
-	              React.createElement(
-	                'a',
-	                { className: 'js-switch-locale', href: '' },
-	                lang === 'en' ? 'See French study' : 'Voir l\'étude UK'
-	              )
+	              React.createElement('br', null)
 	            )
 	          ),
 	          React.createElement(
