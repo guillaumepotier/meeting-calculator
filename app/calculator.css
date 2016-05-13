@@ -131,6 +131,21 @@
 .Grid-cell--discuss {
     padding-right: 1rem;
 }
+
+.Icon {
+    line-height: 0.5rem;
+    vertical-align: inherit;
+}
+
+.switch-locale {
+    margin-top: 0.5rem;
+    float: right;
+}
+
+.Grid-cell--switch {
+    height: 0;
+}
+
 @media only screen and (max-width:481px) {
     .Legend {
         font-size: 1.7rem;

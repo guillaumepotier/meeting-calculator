@@ -29,11 +29,11 @@ var TwitterButton = sharing.TwitterButton;
  * @param mixed   s: sections delimiter
  * @param mixed   c: decimal delimiter
  */
-Number.prototype.format = function () {
+Number.prototype.format = function (n, x) {
   if ('fr' === window.lang)
-    var n = 2, x = 3, s = ' ', c = ',';
+    var s = ' ', c = ',';
   else
-    var n = 2, x = 3, s = ',', c = '.';
+    var s = ',', c = '.';
 
   var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
     num = this.toFixed(Math.max(0, ~~n));
@@ -91,25 +91,29 @@ var CalculatorBox = React.createClass({
       }
     }
 
-    var results = {};
+    var results = {department: {}, sector: {}};
     var params = [ 'weeklyMeetings', 'avgDuration', 'percentUnproductive' ];
     for (i = 0; i < params.length; i++) {
-      results[params[i]] = ( 1 + ( (abacus.department[inputs.department][i]-abacus.global[i])/abacus.global[i]  +
+      results['department'][params[i]] = ( 1 + ( (abacus.department[inputs.department][i]-abacus.global[i])/abacus.global[i]  +
+      (abacus.department[inputs.sector][i]-abacus.global[i])/abacus.global[i] +
+      (abacus.size[category][i]-abacus.global[i])/abacus.global[i] ) / 3 ) * abacus.global[i];
+
+      results['sector'][params[i]] = ( 1 + ( (abacus.sector[inputs.sector][i]-abacus.global[i])/abacus.global[i]  +
       (abacus.sector[inputs.sector][i]-abacus.global[i])/abacus.global[i] +
       (abacus.size[category][i]-abacus.global[i])/abacus.global[i] ) / 3 ) * abacus.global[i];
     }
 
     var team =
-      results.weeklyMeetings * // weekly meeting
-      results.avgDuration * // avg meeting duraction
-      results.percentUnproductive / 100 * // % improductive meetings
+      results['department'].weeklyMeetings * // weekly meeting
+      results['department'].avgDuration * // avg meeting duraction
+      results['department'].percentUnproductive / 100 * // % improductive meetings
       48 *
       inputs.team; // team members
 
     var company =
-      results.weeklyMeetings * // weekly meeting
-      results.avgDuration * // avg meeting duraction
-      results.percentUnproductive / 100 * // % improductive meetings
+      results['sector'].weeklyMeetings * // weekly meeting
+      results['sector'].avgDuration * // avg meeting duraction
+      results['sector'].percentUnproductive / 100 * // % improductive meetings
       48 *
       inputs.size *  // entreprise size
       abacus.sector[inputs.sector][3] / 100; // % white collar
@@ -117,12 +121,12 @@ var CalculatorBox = React.createClass({
     this.setState({
       inputs: inputs,
       team: {
-        hours: Math.round(team),
-        money: (Math.round(team * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3, ',', '.')
+        hours: Math.round(team).format(0, 3),
+        money: (Math.round(team * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3)
       },
       company: {
-        hours: Math.round(company),
-        money: (Math.round(company * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3, ',', '.')
+        hours: Math.round(company).format(0, 3),
+        money: (Math.round(company * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3)
       }
     });
 
@@ -147,6 +151,12 @@ var CalculatorBox = React.createClass({
           window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareLink)+ '&display=popup&ref=plugin&src=like&app_id=113869198637480&quote=' + encodeURIComponent(shareTitle),'Facebook','menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
           break;
       }
+    });
+
+    $(".js-switch-locale").on('click', function (e) {
+      e.preventDefault();
+      window.location.hash = 'en' === lang ? '#fr' : '#en';
+      window.location.reload(true);
     });
 
     $("head").append('<meta property="og:title" content="' + __('Meetings cost calculator') + '" />' +
@@ -200,13 +210,23 @@ var CalculatorBox = React.createClass({
                 <h4>{__('Waste in unproductive meetings per year')}</h4>
 
                 <div className="Grid Grid--results">
-                  <div className="Grid-cell Grid-cell--6 Grid-cell--title">{__('For your team')}</div>
+                  <div className="Grid-cell Grid-cell--6 Grid-cell--title">
+                    {__('For your team')}{' '}
+                    <span className="has-tooltip has-tooltip--l has-tooltip--top" aria-label={__('What does this mean? eg: Based on our research, on average, Operations teams runs more unproductive meetings (41%) than any other department. A 20-people Operations team consequently looses on average in the UK 1,859 working hours and £30,347 per year during these improductive meetings.')}>
+                      <div className="Icon Icon--info Icon--l"></div>
+                    </span>
+                  </div>
                   <div className="Grid-cell Grid-cell--3 Grid-cell--hours">{this.state.team.hours} {__('hours')}</div>
                   <div className="Grid-cell Grid-cell--3 Grid-cell--money" dangerouslySetInnerHTML={{ __html: __('&pound; %f').replace('%f', this.state.team.money) }}></div>
                 </div>
 
                 <div className="Grid Grid--results">
-                  <div className="Grid-cell Grid-cell--6 Grid-cell--title">{__('For your company')}</div>
+                  <div className="Grid-cell Grid-cell--6 Grid-cell--title">
+                    {__('For your company')}{' '}
+                    <span className="has-tooltip has-tooltip--l has-tooltip--bottom" aria-label={__('What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 81,645 working hours and £1,306,314 per year during these improductive meetings.')}>
+                      <div className="Icon Icon--info Icon--l"></div>
+                    </span>
+                  </div>
                   <div className="Grid-cell Grid-cell--3 Grid-cell--hours">{this.state.company.hours} {__('hours')}</div>
                   <div className="Grid-cell Grid-cell--3 Grid-cell--money" dangerouslySetInnerHTML={{ __html: __('&pound; %f').replace('%f', this.state.company.money) }}></div>
                 </div>
@@ -234,7 +254,8 @@ var CalculatorBox = React.createClass({
           <div className="Grid Grid--footer u-vam">
             <div className="Grid-cell Grid-cell--4">
               <p className="t-caption t-caption--copy">
-                <a href={__('http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator')} target="_blank">{__('Wisembly 2016 Survey')}<br/>{__('conducted by Censuswide')}</a>
+                <a href={__('http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator')} target="_blank">{__('Wisembly 2016 UK Survey')}<br/>{__('conducted by Censuswide')}</a><br/>
+                <a className="js-switch-locale" href="">{lang === 'en' ? 'See French study' : 'Voir l\'étude UK'}</a>
               </p>
             </div>
 

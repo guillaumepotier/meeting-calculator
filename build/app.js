@@ -49,15 +49,15 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(31);
 	
-	window.locales = __webpack_require__(168);
+	window.locales = __webpack_require__(165);
 	window.lang = 'en';
 	
 	if ('#fr' === window.location.hash) window.lang = 'fr';
 	
-	window.abacus = __webpack_require__(165)[window.lang];
+	window.abacus = __webpack_require__(166)[window.lang];
 	
-	var sharing = __webpack_require__(166);
-	var components = __webpack_require__(167);
+	var sharing = __webpack_require__(167);
+	var components = __webpack_require__(168);
 	
 	var CompanySector = components.CompanySector,
 	    CompanySize = components.CompanySize,
@@ -74,13 +74,9 @@
 	 * @param mixed   s: sections delimiter
 	 * @param mixed   c: decimal delimiter
 	 */
-	Number.prototype.format = function () {
-	  if ('fr' === window.lang) var n = 2,
-	      x = 3,
-	      s = ' ',
-	      c = ',';else var n = 2,
-	      x = 3,
-	      s = ',',
+	Number.prototype.format = function (n, x) {
+	  if ('fr' === window.lang) var s = ' ',
+	      c = ',';else var s = ',',
 	      c = '.';
 	
 	  var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
@@ -139,32 +135,34 @@
 	      }
 	    }
 	
-	    var results = {};
+	    var results = { department: {}, sector: {} };
 	    var params = ['weeklyMeetings', 'avgDuration', 'percentUnproductive'];
 	    for (i = 0; i < params.length; i++) {
-	      results[params[i]] = (1 + ((abacus.department[inputs.department][i] - abacus.global[i]) / abacus.global[i] + (abacus.sector[inputs.sector][i] - abacus.global[i]) / abacus.global[i] + (abacus.size[category][i] - abacus.global[i]) / abacus.global[i]) / 3) * abacus.global[i];
+	      results['department'][params[i]] = (1 + ((abacus.department[inputs.department][i] - abacus.global[i]) / abacus.global[i] + (abacus.department[inputs.sector][i] - abacus.global[i]) / abacus.global[i] + (abacus.size[category][i] - abacus.global[i]) / abacus.global[i]) / 3) * abacus.global[i];
+	
+	      results['sector'][params[i]] = (1 + ((abacus.sector[inputs.sector][i] - abacus.global[i]) / abacus.global[i] + (abacus.sector[inputs.sector][i] - abacus.global[i]) / abacus.global[i] + (abacus.size[category][i] - abacus.global[i]) / abacus.global[i]) / 3) * abacus.global[i];
 	    }
 	
-	    var team = results.weeklyMeetings * // weekly meeting
-	    results.avgDuration * // avg meeting duraction
-	    results.percentUnproductive / 100 * // % improductive meetings
+	    var team = results['department'].weeklyMeetings * // weekly meeting
+	    results['department'].avgDuration * // avg meeting duraction
+	    results['department'].percentUnproductive / 100 * // % improductive meetings
 	    48 * inputs.team; // team members
 	
-	    var company = results.weeklyMeetings * // weekly meeting
-	    results.avgDuration * // avg meeting duraction
-	    results.percentUnproductive / 100 * // % improductive meetings
+	    var company = results['sector'].weeklyMeetings * // weekly meeting
+	    results['sector'].avgDuration * // avg meeting duraction
+	    results['sector'].percentUnproductive / 100 * // % improductive meetings
 	    48 * inputs.size * // entreprise size
 	    abacus.sector[inputs.sector][3] / 100; // % white collar
 	
 	    this.setState({
 	      inputs: inputs,
 	      team: {
-	        hours: Math.round(team),
-	        money: (Math.round(team * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3, ',', '.')
+	        hours: Math.round(team).format(0, 3),
+	        money: (Math.round(team * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3)
 	      },
 	      company: {
-	        hours: Math.round(company),
-	        money: (Math.round(company * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3, ',', '.')
+	        hours: Math.round(company).format(0, 3),
+	        money: (Math.round(company * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3)
 	      }
 	    });
 	
@@ -189,6 +187,12 @@
 	          window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(shareLink) + '&display=popup&ref=plugin&src=like&app_id=113869198637480&quote=' + encodeURIComponent(shareTitle), 'Facebook', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
 	          break;
 	      }
+	    });
+	
+	    $(".js-switch-locale").on('click', function (e) {
+	      e.preventDefault();
+	      window.location.hash = 'en' === lang ? '#fr' : '#en';
+	      window.location.reload(true);
 	    });
 	
 	    $("head").append('<meta property="og:title" content="' + __('Meetings cost calculator') + '" />' + '<meta property="og:description" content="' + __('Estimate how much your company could spare by putting an end to unproductive meetings with this calculator.') + '" />' + '<meta property="og:image" content="./assets/logo.png" />');
@@ -281,7 +285,13 @@
 	                React.createElement(
 	                  'div',
 	                  { className: 'Grid-cell Grid-cell--6 Grid-cell--title' },
-	                  __('For your team')
+	                  __('For your team'),
+	                  ' ',
+	                  React.createElement(
+	                    'span',
+	                    { className: 'has-tooltip has-tooltip--l has-tooltip--top', 'aria-label': __('What does this mean? eg: Based on our research, on average, Operations teams runs more unproductive meetings (41%) than any other department. A 20-people Operations team consequently looses on average in the UK 1,859 working hours and £30,347 per year during these improductive meetings.') },
+	                    React.createElement('div', { className: 'Icon Icon--info Icon--l' })
+	                  )
 	                ),
 	                React.createElement(
 	                  'div',
@@ -298,7 +308,13 @@
 	                React.createElement(
 	                  'div',
 	                  { className: 'Grid-cell Grid-cell--6 Grid-cell--title' },
-	                  __('For your company')
+	                  __('For your company'),
+	                  ' ',
+	                  React.createElement(
+	                    'span',
+	                    { className: 'has-tooltip has-tooltip--l has-tooltip--bottom', 'aria-label': __('What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 81,645 working hours and £1,306,314 per year during these improductive meetings.') },
+	                    React.createElement('div', { className: 'Icon Icon--info Icon--l' })
+	                  )
 	                ),
 	                React.createElement(
 	                  'div',
@@ -355,9 +371,15 @@
 	              React.createElement(
 	                'a',
 	                { href: __('http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator'), target: '_blank' },
-	                __('Wisembly 2016 Survey'),
+	                __('Wisembly 2016 UK Survey'),
 	                React.createElement('br', null),
 	                __('conducted by Censuswide')
+	              ),
+	              React.createElement('br', null),
+	              React.createElement(
+	                'a',
+	                { className: 'js-switch-locale', href: '' },
+	                lang === 'en' ? 'See French study' : 'Voir l\'étude UK'
 	              )
 	            )
 	          ),
@@ -20232,6 +20254,41 @@
 	'use strict';
 	
 	module.exports = {
+	  fr: {
+	    'Meetings cost calculator': 'Meetings cost calculator',
+	    'Estimate how much your company could spare by putting an end to unproductive meetings with this calculator.': 'Découvrez combien vous pourriez économiser en mettant fin aux réunions improductives avec ce calculateur.',
+	    '&pound; %f': '%f &euro;',
+	    'How much could you spare by putting an end to unproductive meetings?': 'Combien pourriez-vous économiser en mettant fin aux réunions improductives de vos cadres ?',
+	    'Waste in unproductive meetings per year': 'Perte annuelle en réunions improductives ',
+	    'For your team': 'Pour votre équipe',
+	    'hours': 'heures',
+	    'For your company': 'Pour votre entreprise',
+	    'Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.': 'Envie d\'échanger ? Chez Wisembly nous avons l\'expertise nécessaire pour vous aider à construire des réunions engageantes et productives à tous les coups.',
+	    "mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers": 'Object: Construisons des réunions plus productives%0D%0ACorps: Je souhaiterais être contacté par un expert de l\'équipe Wisembly%0D%0AMon numéro de téléphone:%0D%0ACordialement',
+	    'Take 10 sec to discover how much your team and company waste in unproductive meetings!': 'Découvrez en 10s combien votre équipe et votre entreprises gâchent en réunions improductives',
+	    'Company industry': 'Secteur de votre entreprise',
+	    'Your department': 'Votre département',
+	    'Please choose': 'Faites une sélection',
+	    'Company size': 'Taille de votre entreprise',
+	    'Number of employees': 'Nombre d’employés',
+	    'Number of team members (including you)': 'Taille de votre équipe (vous compris)',
+	    'Attending meetings': 'Participant à des réunions',
+	    'Wisembly 2016 UK Survey': 'Étude France Wisembly 2016',
+	    'conducted by Censuswide': 'réalisée par l\'IFOP',
+	    'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop',
+	    'Contact us': 'Contactez nous',
+	    'What does this mean? eg: Based on our research, on average, Operations teams runs more unproductive meetings (41%) than any other department. A 20-people Operations team consequently looses on average in the UK 1,859 working hours and £30,347 per year during these improductive meetings.': '',
+	    'What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 81,645 working hours and £1,306,314 per year during these improductive meetings.': ''
+	  }
+	};
+
+/***/ },
+/* 166 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
 	  en: {
 	    // meetings/week, avg meeting duration, %unproductive
 	    global: [5.6, 1.07, 36],
@@ -20325,7 +20382,7 @@
 	};
 
 /***/ },
-/* 166 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20379,7 +20436,7 @@
 	};
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20529,39 +20586,6 @@
 	  CompanySize: CompanySize,
 	  CompanyDepartment: CompanyDepartment,
 	  TeamMembers: TeamMembers
-	};
-
-/***/ },
-/* 168 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = {
-	  fr: {
-	    'Meetings cost calculator': 'Meetings cost calculator',
-	    'Estimate how much your company could spare by putting an end to unproductive meetings with this calculator.': 'Découvrez combien vous pourriez économiser en mettant fin aux réunions improductives avec ce calculateur.',
-	    '&pound; %f': '%f &euro;',
-	    'How much could you spare by putting an end to unproductive meetings?': 'Combien pourriez-vous économiser en mettant fin aux réunions improductives de vos cadres ?',
-	    'Waste in unproductive meetings per year': 'Perte annuelle en réunions improductives ',
-	    'For your team': 'Pour votre équipe',
-	    'hours': 'heures',
-	    'For your company': 'Pour votre entreprise',
-	    'Want to discuss? Wisembly has the expertise to help you run engaging and productive meetings every time.': 'Envie d\'échanger ? Chez Wisembly nous avons l\'expertise nécessaire pour vous aider à construire des réunions engageantes et productives à tous les coups.',
-	    "mailto:contact@wisembly.com?subject=Let's start running productive meetings&body=I would like to be contacted by an expert from the Wisembly Team.%0D%0A Here is my phone number:%0D%0A Cheers": 'Object: Construisons des réunions plus productives%0D%0ACorps: Je souhaiterais être contacté par un expert de l\'équipe Wisembly%0D%0AMon numéro de téléphone:%0D%0ACordialement',
-	    'Take 10 sec to discover how much your team and company waste in unproductive meetings!': 'Découvrez en 10s combien votre équipe et votre entreprises gâchent en réunions improductives',
-	    'Company industry': 'Secteur de votre entreprise',
-	    'Your department': 'Votre département',
-	    'Please choose': 'Faites une sélection',
-	    'Company size': 'Taille de votre entreprise',
-	    'Number of employees': 'Nombre d’employés',
-	    'Number of team members (including you)': 'Taille de votre équipe (vous compris)',
-	    'Attending meetings': 'Participant à des réunions',
-	    'Wisembly 2016 Survey': 'Étude Wisembly 2016',
-	    'conducted by Censuswide': 'réalisée par l\'IFOP',
-	    'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop',
-	    'Contact us': 'Contactez nous'
-	  }
 	};
 
 /***/ }

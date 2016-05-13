@@ -18,9 +18,11 @@ module.exports = {
     'Number of employees': 'Nombre d’employés',
     'Number of team members (including you)': 'Taille de votre équipe (vous compris)',
     'Attending meetings': 'Participant à des réunions',
-    'Wisembly 2016 Survey': 'Étude Wisembly 2016',
+    'Wisembly 2016 UK Survey': 'Étude France Wisembly 2016',
     'conducted by Censuswide': 'réalisée par l\'IFOP',
     'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop',
-    'Contact us': 'Contactez nous'
+    'Contact us': 'Contactez nous',
+    'What does this mean? eg: Based on our research, on average, Operations teams runs more unproductive meetings (41%) than any other department. A 20-people Operations team consequently looses on average in the UK 1,859 working hours and £30,347 per year during these improductive meetings.':'',
+    'What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 81,645 working hours and £1,306,314 per year during these improductive meetings.': ''
   }
 }
