@@ -122,7 +122,7 @@ var CalculatorBox = React.createClass({
       inputs: inputs,
       team: {
         hours: Math.round(team).format(0, 3),
-        money: (Math.round(team * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3)
+        money: (Math.round(team * abacus.sector[inputs.department][4] * 100) / 100).format(2, 3)
       },
       company: {
         hours: Math.round(company).format(0, 3),
@@ -223,7 +223,7 @@ var CalculatorBox = React.createClass({
                 <div className="Grid Grid--results">
                   <div className="Grid-cell Grid-cell--6 Grid-cell--title">
                     {__('For your company')}{' '}
-                    <span className="has-tooltip has-tooltip--l has-tooltip--bottom" aria-label={__('What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 81,645 working hours and £1,306,314 per year during these improductive meetings.')}>
+                    <span className="has-tooltip has-tooltip--l has-tooltip--bottom" aria-label={__('What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 54,188 working hours and £868,649 per year during these improductive meetings.')}>
                       <div className="Icon Icon--info Icon--l"></div>
                     </span>
                   </div>

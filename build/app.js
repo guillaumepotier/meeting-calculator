@@ -158,7 +158,7 @@
 	      inputs: inputs,
 	      team: {
 	        hours: Math.round(team).format(0, 3),
-	        money: (Math.round(team * abacus.sector[inputs.sector][4] * 100) / 100).format(2, 3)
+	        money: (Math.round(team * abacus.sector[inputs.department][4] * 100) / 100).format(2, 3)
 	      },
 	      company: {
 	        hours: Math.round(company).format(0, 3),
@@ -312,7 +312,7 @@
 	                  ' ',
 	                  React.createElement(
 	                    'span',
-	                    { className: 'has-tooltip has-tooltip--l has-tooltip--bottom', 'aria-label': __('What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 81,645 working hours and £1,306,314 per year during these improductive meetings.') },
+	                    { className: 'has-tooltip has-tooltip--l has-tooltip--bottom', 'aria-label': __('What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 54,188 working hours and £868,649 per year during these improductive meetings.') },
 	                    React.createElement('div', { className: 'Icon Icon--info Icon--l' })
 	                  )
 	                ),
@@ -20272,8 +20272,8 @@
 	    'conducted by Censuswide': 'réalisée par l\'IFOP',
 	    'http://wisembly.com/en/blog/2016/05/03/uk-survey-wisembly-censuswide-meeting-cost-2016?utm=meetingcalculator&utc=meetingcalculator': 'http://wisembly.com/blog/2016/03/30/la-reunion-de-demain-sera-productive-quels-formats-privilegier-resultats-du-barometre-annuel-de-wisembly-en-partenariat-avec-lifop',
 	    'Contact us': 'Contactez nous',
-	    'What does this mean? eg: Based on our research, on average, Operations teams runs more unproductive meetings (41%) than any other department. A 20-people Operations team consequently looses on average in the UK 1,859 working hours and £30,347 per year during these improductive meetings.': '',
-	    'What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 81,645 working hours and £1,306,314 per year during these improductive meetings.': ''
+	    'What does this mean? eg: Based on our research, on average, Operations teams runs more unproductive meetings (41%) than any other department. A 20-people Operations team consequently looses on average in the UK 1,859 working hours and £30,347 per year during these improductive meetings.': 'Que signifie ce résultat ? Sur la base de notre baromètre annuel, les cadres dans les départements Finances sont les plus inefficaces en réunion (43%). Une équipe financière de 20 collaborateurs perd annuellement, en moyenne, en France, 1618 heures de travail et 40 952 euros au cours de réunions improductives.',
+	    'What does this mean? eg: Based on our research, on average, Aeronautics & Defense runs more unproductive meetings (67%) than any other industry. A 500-people Aeronautics & Defense company consequently looses on average in the UK 54,188 working hours and £868,649 per year during these improductive meetings.': 'Que signifie ce résultat ? Sur la base de notre baromètre annuel, les cadres dans le secteur de la Grande Distribution sont les plus inefficaces en réunion (47%). Une entreprise dans ce secteur de 500 collaborateurs perd annuellement, en moyenne, en France, 5 658 heures de travail et 136 799 euros au cours de réunions improductives.'
 	  }
 	};
 
@@ -20287,16 +20287,16 @@
 	  en: {
 	    // meetings/week, avg meeting duration, %unproductive
 	    global: [5.6, 1.07, 36],
-	    // meetings/week, avg meeting duration, %unproductive
-	    department: [[5.52, 1.16, 37.73], // HR
-	    [7.44, 1.76, 36.78], // Marketing
-	    [5.80, 0.95, 28.30], // Events and communications
-	    [7.71, 1.30, 23.04], // Legal
-	    [4.17, 0.93, 32.59], // Sales
-	    [6.98, 1.19, 39.75], // Technology, Digital and innovation
-	    [5.96, 1.15, 37.29], // IT
-	    [4.25, 0.81, 28.06], // Finance
-	    [5.19, 0.91, 40.62] // Operational service
+	    // meetings/week, avg meeting duration, %unproductive, mean salary
+	    department: [[5.52, 1.16, 37.73, 16.71], // HR
+	    [7.44, 1.76, 36.78, 16.39], // Marketing
+	    [5.80, 0.95, 28.30, 15.75], // Events and communications
+	    [7.71, 1.30, 23.04, 22.54], // Legal
+	    [4.17, 0.93, 32.59, 16.75], // Sales
+	    [6.98, 1.19, 39.75, 21.93], // Technology, Digital and innovation
+	    [5.96, 1.15, 37.29, 21.93], // IT
+	    [4.25, 0.81, 28.06, 22.62], // Finance
+	    [5.19, 0.91, 40.62, 16.33] // Operational service
 	    ],
 	    departments: ['HR', 'Marketing', 'Events and communications', 'Legal', 'Sales', 'Technology, Digital and innovation', 'IT', 'Finance', 'Operational service'],
 	    // meetings/week, avg meeting duration, %unproductive, % white collars, mean salary
@@ -20330,15 +20330,15 @@
 	  fr: {
 	    // meetings/week, avg meeting duration, %unproductive
 	    global: [3.2, 1.33, 42],
-	    // meetings/week, avg meeting duration, %unproductive
-	    department: [[4.3, 1.13, 40.0], // Achats
-	    [3.6, 1.45, 38.3], // Direction
-	    [2.9, 1.35, 41.3], // Commercial
-	    [2.9, 1.38, 43.0], // Finance
-	    [3.0, 1.37, 39.0], // RH
-	    [4.4, 1.28, 42.8], // Service Informatique
-	    [3.7, 1.35, 40.5], // Service opérationnel
-	    [3.8, 1.17, 41.3] // Communication, marketing
+	    // meetings/week, avg meeting duration, %unproductive, mean salary
+	    department: [[4.3, 1.13, 40.0, 24.92], // Achats
+	    [3.6, 1.45, 38.3, 24.68], // Direction
+	    [2.9, 1.35, 41.3, 25.11], // Commercial
+	    [2.9, 1.38, 43.0, 25.31], // Finance
+	    [3.0, 1.37, 39.0, 23.70], // RH
+	    [4.4, 1.28, 42.8, 24.54], // Service Informatique
+	    [3.7, 1.35, 40.5, 24.92], // Service opérationnel
+	    [3.8, 1.17, 41.3, 24.93] // Communication, marketing
 	    ],
 	    departments: ['Achats', 'Direction', 'Commercial', 'Finance', 'RH', 'Service Informatique', 'Service opérationnel', ' Communication, marketing'],
 	    // meetings/week, avg meeting duration, %unproductive, % white collars, mean salary

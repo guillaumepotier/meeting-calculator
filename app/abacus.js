@@ -2,17 +2,17 @@ module.exports = {
   en: {
     // meetings/week, avg meeting duration, %unproductive
     global: [ 5.6, 1.07, 36 ],
-    // meetings/week, avg meeting duration, %unproductive
+    // meetings/week, avg meeting duration, %unproductive, mean salary
     department: [
-      [ 5.52, 1.16, 37.73 ], // HR
-      [ 7.44, 1.76, 36.78 ], // Marketing
-      [ 5.80, 0.95, 28.30 ], // Events and communications
-      [ 7.71, 1.30, 23.04 ], // Legal
-      [ 4.17, 0.93, 32.59 ], // Sales
-      [ 6.98, 1.19, 39.75 ], // Technology, Digital and innovation
-      [ 5.96, 1.15, 37.29 ], // IT
-      [ 4.25, 0.81, 28.06 ], // Finance
-      [ 5.19, 0.91, 40.62 ] // Operational service
+      [ 5.52, 1.16, 37.73, 16.71 ], // HR
+      [ 7.44, 1.76, 36.78, 16.39 ], // Marketing
+      [ 5.80, 0.95, 28.30, 15.75 ], // Events and communications
+      [ 7.71, 1.30, 23.04, 22.54 ], // Legal
+      [ 4.17, 0.93, 32.59, 16.75 ], // Sales
+      [ 6.98, 1.19, 39.75, 21.93 ], // Technology, Digital and innovation
+      [ 5.96, 1.15, 37.29, 21.93 ], // IT
+      [ 4.25, 0.81, 28.06, 22.62 ], // Finance
+      [ 5.19, 0.91, 40.62, 16.33 ] // Operational service
     ],
     departments: ['HR', 'Marketing', 'Events and communications', 'Legal', 'Sales', 'Technology, Digital and innovation', 'IT', 'Finance', 'Operational service'],
     // meetings/week, avg meeting duration, %unproductive, % white collars, mean salary
@@ -48,16 +48,16 @@ module.exports = {
   fr: {
     // meetings/week, avg meeting duration, %unproductive
     global: [ 3.2, 1.33, 42 ],
-    // meetings/week, avg meeting duration, %unproductive
+    // meetings/week, avg meeting duration, %unproductive, mean salary
     department: [
-      [ 4.3, 1.13, 40.0 ], // Achats
-      [ 3.6, 1.45, 38.3 ], // Direction
-      [ 2.9, 1.35, 41.3 ], // Commercial
-      [ 2.9, 1.38, 43.0 ], // Finance
-      [ 3.0, 1.37, 39.0 ], // RH
-      [ 4.4, 1.28, 42.8 ], // Service Informatique
-      [ 3.7, 1.35, 40.5 ], // Service opérationnel
-      [ 3.8, 1.17, 41.3 ] // Communication, marketing
+      [ 4.3, 1.13, 40.0, 24.92 ], // Achats
+      [ 3.6, 1.45, 38.3, 24.68 ], // Direction
+      [ 2.9, 1.35, 41.3, 25.11 ], // Commercial
+      [ 2.9, 1.38, 43.0, 25.31 ], // Finance
+      [ 3.0, 1.37, 39.0, 23.70 ], // RH
+      [ 4.4, 1.28, 42.8, 24.54 ], // Service Informatique
+      [ 3.7, 1.35, 40.5, 24.92 ], // Service opérationnel
+      [ 3.8, 1.17, 41.3, 24.93 ] // Communication, marketing
     ],
     departments: ['Achats', 'Direction', 'Commercial', 'Finance', 'RH', 'Service Informatique', 'Service opérationnel', ' Communication, marketing'],
     // meetings/week, avg meeting duration, %unproductive, % white collars, mean salary
