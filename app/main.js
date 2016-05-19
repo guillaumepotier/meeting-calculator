@@ -91,29 +91,24 @@ var CalculatorBox = React.createClass({
       }
     }
 
-    var results = {department: {}, sector: {}};
+    var results = {};
     var params = [ 'weeklyMeetings', 'avgDuration', 'percentUnproductive' ];
-    for (i = 0; i < params.length; i++) {
-      results['department'][params[i]] = ( 1 + ( (abacus.department[inputs.department][i]-abacus.global[i])/abacus.global[i]  +
-      (abacus.department[inputs.sector][i]-abacus.global[i])/abacus.global[i] +
-      (abacus.size[category][i]-abacus.global[i])/abacus.global[i] ) / 3 ) * abacus.global[i];
-
-      results['sector'][params[i]] = ( 1 + ( (abacus.sector[inputs.sector][i]-abacus.global[i])/abacus.global[i]  +
+    for (i = 0; i < params.length; i++)
+      results[params[i]] = ( 1 + ( (abacus.department[inputs.department][i]-abacus.global[i])/abacus.global[i]  +
       (abacus.sector[inputs.sector][i]-abacus.global[i])/abacus.global[i] +
       (abacus.size[category][i]-abacus.global[i])/abacus.global[i] ) / 3 ) * abacus.global[i];
-    }
 
     var team =
-      results['department'].weeklyMeetings * // weekly meeting
-      results['department'].avgDuration * // avg meeting duraction
-      results['department'].percentUnproductive / 100 * // % improductive meetings
+      results.weeklyMeetings * // weekly meeting
+      results.avgDuration * // avg meeting duraction
+      results.percentUnproductive / 100 * // % improductive meetings
       48 *
       inputs.team; // team members
 
     var company =
-      results['sector'].weeklyMeetings * // weekly meeting
-      results['sector'].avgDuration * // avg meeting duraction
-      results['sector'].percentUnproductive / 100 * // % improductive meetings
+      results.weeklyMeetings * // weekly meeting
+      results.avgDuration * // avg meeting duraction
+      results.percentUnproductive / 100 * // % improductive meetings
       48 *
       inputs.size *  // entreprise size
       abacus.sector[inputs.sector][3] / 100; // % white collar
