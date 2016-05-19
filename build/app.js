@@ -20356,7 +20356,7 @@
 	    [3.0, 1.60, 43.0, 40.0, 23.34], // Administration publique
 	    [2.5, 1.39, 38.8, 40.0, 24.15] // Enseignement, santé humaine et action sociale
 	    ],
-	    sectors: ['Industrie agroalimentaire', 'Industrie lourde', 'Industries des biens de consommation', 'Energie, environnement', 'Batiment, travaux publics', 'Transports, logistique', 'Commerce, de gros/de détail', 'Grande distribution', 'Hôtellerie, restauration, tourisme, loisirs', 'Industrial', 'Banque, assurance, services financiers', 'Information et communication', 'Immobilier', 'Informatique, Internet, multimédia, télecoms', 'Services aux entreprises', 'Services aux particuliers', 'Administration publique', 'Enseignement, santé humaine et action sociale'],
+	    sectors: ['Industrie agroalimentaire', 'Industrie lourde', 'Industries des biens de consommation', 'Energie, environnement', 'Batiment, travaux publics', 'Transports, logistique', 'Commerce, de gros/de détail', 'Grande distribution', 'Hôtellerie, restauration, tourisme, loisirs', 'Banque, assurance, services financiers', 'Information et communication', 'Immobilier', 'Informatique, Internet, multimédia, télecoms', 'Services aux entreprises', 'Services aux particuliers', 'Administration publique', 'Enseignement, santé humaine et action sociale'],
 	    // meetings/week, avg meeting duration, %unproductive
 	    size: [[1.4, 1.12, 38.5], // 1 - 9 employees
 	    [1.8, 0.98, 35.3], // 10 - 19 employees
